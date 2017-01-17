@@ -1,6 +1,8 @@
 module.exports = {
-  server: {},
-  dashboard: {},
-  storage: {},
-  push: {}
+	server: {
+		allowClientClassCreation: true
+	},
+	dashboard: {},
+	storage: {},
+	push: {}
 }
