@@ -356,26 +356,10 @@
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 		<!--Parse-->
-		<script type="text/javascript" src="js/parse-1.3.2.min.js"></script>
+		<script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
 		<script type="text/javascript">
-			switch(location.hash.substring(1).toLowerCase()){
-				case "ali":
-					Parse.initialize("RHaZdi7XmFU4gBfRdvbrrv21m8xCAi5VbO3sHpEh", "2uhFVYSWlZwYXDxwc6yPiA6wMitBCiNevJGtNhce");
-					document.title += " Ali";
-					break;
-				case "laura":
-					Parse.initialize("4a8cawQ0iNCdFpQP8U1Er3fzufeMWmfF2hd0eFoi", "gSFkvttfaFuVm33N0cCpSktZgjKD6UGyO51SYUl2");
-					document.title += " Laura";
-					break;
-				case "original":
-					Parse.initialize("DwxYG1GVVmvceeg31w6nQ42wkX3BW4ZD3ic5WfeN", "P0Wfoc6db7MNvUDpc533ZI43IRBLqIxqbmM2j5dF");
-					document.title += " Original";
-					break;
-				default:
-					Parse.initialize("Sh2pGZ81hN9hNsS1EmTESS2Mztg3bddJ3Vj9knWt", "KK536nMOUWquVkvRsKQE4i2cHeHmpkBhwbjhXaGa");
-					document.title += " Default";
-					break;
-			}
+			Parse.initialize("Sh2pGZ81hN9hNsS1EmTESS2Mztg3bddJ3Vj9knWt");
+			Parse.serverURL = "https://scratchplus.azurewebsites.net/parse";
 		</script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/points.js"></script>
