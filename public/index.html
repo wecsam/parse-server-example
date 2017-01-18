@@ -265,9 +265,9 @@
 					</div>
 					<div class="modal-body worldSelectMenu" id="worldSelectMenu">
 						<div class="row">
-							<button class="btn btn-primary worldButton" type="button" id="world1"         value=1>Problem set 1</button>
-							<button class="btn btn-primary worldButton" type="button" id="world2"         value=2>Problem set 2</button>
-							<button class="btn btn-primary"             type="button" id="challengeTask"  value=99 data-dismiss="modal">Challenge</button>
+							<button class="btn btn-primary worldButton" type="button" id="world1"         value="1"        >Problem Set 1</button>
+							<button class="btn btn-primary worldButton" type="button" id="world2"         value="2"        >Problem Set 2</button>
+							<button class="btn btn-primary worldButton" type="button" id="worldChallenge" value="Challenge">Challenges</button>
 						</div>
 					</div>
 					<div class="modal-body levelSelectMenu" id="levelSelectMenu1">
@@ -335,10 +335,15 @@
 							<button class="btn btn-primary" type="button" id="level43" data-dismiss="modal" value=23 disabled style="display:none">Problem 23</button>
 						</div>
 					</div>
+					<div class="modal-body levelSelectMenu" id="levelSelectMenuChallenge">
+						<div class="row">
+							<button class="btn btn-primary" type="button" id="level99" data-dismiss="modal" value=99>Challenge 99</button>
+						</div>
+					</div>
 					<div class="modal-footer">
 						<span id="conditionIndicator" class="modal-footer-info"></span>
 						<button type="button" class="retry btn btn-default" id="levelSelectBack">Problem Sets</button>
-						<button type="button" class="retry btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="retry btn btn-default level-select-footer-close" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>

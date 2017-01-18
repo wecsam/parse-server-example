@@ -261,17 +261,23 @@ $( document ).ready(function() {
 		LoadNextLevel();
 	});
 
+	var challengesEnabled = false;
 	$("#levelSelect").click(function(){
 		hideControlsMenu();
 
+		$("#worldSelectMenu").hide();
 		if(currentLevel <= 20){
-			$("#worldSelectMenu").hide();
 			$("#levelSelectMenu1").show();
 			$("#levelSelectMenu2").hide();
+			$("#levelSelectMenuChallenge").hide();
 		}else if(currentLevel <= 42){
-			$("#worldSelectMenu").hide();
 			$("#levelSelectMenu1").hide();
 			$("#levelSelectMenu2").show();
+			$("#levelSelectMenuChallenge").hide();
+		}else if(challengesEnabled){
+			$("#levelSelectMenu1").hide();
+			$("#levelSelectMenu2").hide();
+			$("#levelSelectMenuChallenge").show();
 		}
 
 		$("#levelSelectModal").modal({
@@ -329,50 +335,58 @@ $( document ).ready(function() {
 	});
 
 	$(".worldButton").click(function(){
+		// Require passwords to enter and exit the challenge world.
+		if(this.value == "Challenge"){
+			// Require password to enter the challenge world.
+			if(!challengesEnabled){
+				var password = prompt("Enter password to visit challenges:");
+				if(password === "ptp"){
+					challengesEnabled = true;
+					$(".level-select-footer-close").prop("disabled", true);
+					// When entering the challenge world, log an event.
+					if(!$.isEmptyObject(CURRENT_USER)){
+						var logEventClass = Parse.Object.extend("ChallengeWorldEnter"),
+							logEvent = new logEventClass();
+						logEvent.set("time", new Date());
+						logEvent.set("UserId", CURRENT_USER.id);
+						logEvent.save();
+					}
+				}else if(password === null){
+					return;
+				}else{
+					alert("That password was incorrect.");
+					return;
+				}
+			}
+		}else{
+			// Require password to exit the challenge world.
+			if(challengesEnabled){
+				var password = prompt("Enter password to leave challenges:");
+				if(password === "ptpexit"){
+					challengesEnabled = false;
+					$(".level-select-footer-close").prop("disabled", true);
+					// When leaving the challenge world, log an event.
+					if(!$.isEmptyObject(CURRENT_USER)){
+						var logEventClass = Parse.Object.extend("ChallengeWorldExit"),
+							logEvent = new logEventClass();
+						logEvent.set("time", new Date());
+						logEvent.set("UserId", CURRENT_USER.id);
+						logEvent.save();
+					}
+				}else if(password === null){
+					return;
+				}else{
+					alert("That password was incorrect.");
+					return;
+				}
+			}
+		}
+		console.log("Opening a world...")
+		// Show the levels in this world.
 		$("#worldSelectMenu").hide();
 		$(".levelSelectMenu").hide();
 		$("#levelSelectMenu" + this.value).show();
 		$("#levelSelectBack").show();
-	});
-
-	$("#challengeTask").click(function(){
-		$("#levelSelectBack").show();
-		var challengePassword = prompt("Password: ");
-		if (challengePassword === "ptp") {
-			LoadLevel(99);
-			$("#researcherButton").show();
-			$("#levelSelect").hide();
-			if(!$.isEmptyObject(CURRENT_USER)) {
-				var StartChallengeTask = Parse.Object.extend("StartChallengeTask");
-				var startChallengeTask = new StartChallengeTask();
-				startChallengeTask.set("time", new Date());
-				startChallengeTask.set("UserId", CURRENT_USER.id);
-				startChallengeTask.save();
-			}
-		}else if(challengePassword && challengePassword.length){
-			alert("The password is incorrect.");
-		}
-	});
-
-	$("#researcherButton").click(function(){
-		var challengeExitPassword = prompt("Password: ");
-		if (challengeExitPassword === "ptpexit") {
-			$("#researcherButton").hide();
-			$("#levelSelect, #levelSelectBack").show();
-			if(!$.isEmptyObject(CURRENT_USER)) {
-				var ExitChallengeTask = Parse.Object.extend("ExitChallengeTask");
-				var exitChallengeTask = new ExitChallengeTask();
-				exitChallengeTask.set("time", new Date());
-				exitChallengeTask.set("UserId", CURRENT_USER.id);
-				exitChallengeTask.save();
-			}
-
-			alert("All done! Thank you!");
-
-			LoadLevel(1);
-		}else if(challengeExitPassword && challengeExitPassword.length){
-			alert("The password is incorrect.");
-		}
 	});
 
 	$(".levelSelectMenu button").click(function(){
@@ -386,6 +400,7 @@ $( document ).ready(function() {
 			levelSelectedFromMenu.set("UserId", CURRENT_USER.id);
 			levelSelectedFromMenu.save();
 		}
+		$(".level-select-footer-close").prop("disabled", false);
 	});
 
 	$(".login-form button").click(function(){
