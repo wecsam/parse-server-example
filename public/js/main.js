@@ -403,7 +403,10 @@ $( document ).ready(function() {
 		$(".level-select-footer-close").prop("disabled", false);
 	});
 
-	$(".login-form button").click(function(){
+	$(".login-form button.login-form-submit").click(function(){
+		// Clear the log in form.
+		$(this).siblings("input").add(this).prop("disabled", true);
+		// Pass the username and password to Parse for logging in.
 		var username = $("#login-username").val().toLowerCase();
 		var password = $("#login-password").val();
 		Parse.User.logIn(username, password).then(
