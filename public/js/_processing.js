@@ -601,8 +601,9 @@ function LoadLevel(level) {
         if (!$.isEmptyObject(CURRENT_USER)) {
             var StartLevel = Parse.Object.extend("StartLevel");
             var startLevel = new StartLevel();
-            startLevel.set("level", level);
+			startLevel.set("time", new Date());
             startLevel.set("UserId", CURRENT_USER.id);
+            startLevel.set("level", level);
             startLevel.save();
         }
 		if(window["LoadLevel" + level]){
