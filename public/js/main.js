@@ -405,11 +405,10 @@ $( document ).ready(function() {
 
 	$(".login-form button.login-form-submit").click(function(){
 		// Clear the log in form.
-		$(this).siblings("input").add(this).prop("disabled", true);
+		var $inputs = $(this).siblings("input").add(this);
+		$inputs.prop("disabled", true);
 		// Pass the username and password to Parse for logging in.
-		var username = $("#login-username").val().toLowerCase();
-		var password = $("#login-password").val();
-		Parse.User.logIn(username, password).then(
+		Parse.User.logIn($("#login-username").val().toLowerCase(), $("#login-password").val()).then(
 			function(user) {
 				//Hide navbar to use all available space
 				$("nav").hide();
@@ -422,10 +421,12 @@ $( document ).ready(function() {
 				UnlockLevels(CURRENT_USER.attributes.maxLevel);
 				console.log("User's max level: " + CURRENT_USER.attributes.maxLevel);
 				$('#loginModal').modal('hide');
-				LoadLevel(CURRENT_USER.attributes.maxLevel);
+				LoadLevel(Math.min(CURRENT_USER.attributes.maxLevel, parseInt($("#levelSelectMenu2 button:last").attr("id").match(/\d+/))));
 			},
 			function(error) {
 				alert("Invalid username or password");
+				$inputs.prop("disabled", false);
+				$("#login-password").val("");
 			}
 		);
 	});
