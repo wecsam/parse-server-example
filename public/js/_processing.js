@@ -83,13 +83,10 @@ function draw() {
         }
 
         DrawSteps();
-    } else { //CHALLENGE TASK
+    } else { // Challenge Levels
         background(100, 100, 100);
-
         target.display();
-
         player.display();
-
         if (obstacles.length > 0) {
             for (var i = 0; i < obstacles.length; i++) {
                 if (obstacles[i].fill) {
@@ -100,9 +97,21 @@ function draw() {
                 ellipse(obstacles[i].x, obstacles[i].y, obstacles[i].diameter, obstacles[i].diameter);
             }
         }
-
-        DrawStepsChallenge();
-    }
+		switch(currentLevel){
+			case 99:
+			case 102:
+			case 103:
+			case 106:
+			case 107:
+			case 109:
+			case 111:
+			case 120:
+				window["DrawStepsLevel" + currentLevel]();
+				break;
+			default:
+				console.error("An unknown level number " + currentLevel + " is set in the draw function.");
+		}
+	}
 }
 
 function runConditionIsPlus(){
@@ -432,51 +441,6 @@ function PlayerChallenge() {
 	}
 };
 
-function DrawStepsChallenge() {
-    var X1 = player.init_x - player.diameter / 2;
-    var Y1 = player.init_y - player.diameter / 2;
-    var width = player.diameter;
-    var height = player.diameter;
-
-
-    emptyCells = [
-        new EmptyCell(X1 + width * 2, Y1 - height * 2, width, height),
-        new EmptyCell(X1 + width * 6, Y1 - height * 2, width, height),
-
-        new EmptyCell(X1 + width * 2, Y1 - height * 1, width, height),
-        new EmptyCell(X1 + width * 6, Y1 - height * 1, width, height),
-
-        new EmptyCell(X1, Y1, width, height),
-        new EmptyCell(X1 + width * 1, Y1, width, height),
-        new EmptyCell(X1 + width * 2, Y1, width, height),
-        new EmptyCell(X1 + width * 3, Y1, width, height),
-        new EmptyCell(X1 + width * 4, Y1, width, height),
-        new EmptyCell(X1 + width * 5, Y1, width, height),
-        new EmptyCell(X1 + width * 6, Y1, width, height),
-
-        new EmptyCell(X1 + width * 2, Y1 + height * 1, width, height),
-        new EmptyCell(X1 + width * 6, Y1 + height * 1, width, height),
-
-        new EmptyCell(X1, Y1 + height * 2, width, height),
-        new EmptyCell(X1 + width * 1, Y1 + height * 2, width, height),
-        new EmptyCell(X1 + width * 2, Y1 + height * 2, width, height),
-        new EmptyCell(X1 + width * 5, Y1 + height * 2, width, height),
-        new EmptyCell(X1 + width * 6, Y1 + height * 2, width, height),
-
-        new EmptyCell(X1 + width * 2, Y1 + height * 3, width, height),
-        new EmptyCell(X1 + width * 3, Y1 + height * 3, width, height),
-        new EmptyCell(X1 + width * 4, Y1 + height * 3, width, height),
-        new EmptyCell(X1 + width * 5, Y1 + height * 3, width, height)
-    ];
-
-    stroke(255, 255, 255);
-    noFill();
-    for (var i = 0; i < emptyCells.length; i++) {
-        rect(emptyCells[i].x, emptyCells[i].y, emptyCells[i].width, emptyCells[i].height);
-    }
-    noStroke();
-};
-
 function EmptyCell(x, y, width, height) {
     //Used for challenge task
     this.x = x;
@@ -562,7 +526,6 @@ function DrawSteps() {
     stroke(255, 255, 255);
     for (var i = 0; i < steps + 1; i++) {
         var x_translate = i * player.diameter;
-        //console.log("Drawing steps");
         line(X1 + x_translate, Y1, X2 + x_translate, Y1);
     }
     noStroke();
@@ -589,7 +552,6 @@ function ReloadLevel() {
     while (animationsArray.length > 0) {
         clearTimeout(animationsArray.pop());
     }
-
     LoadLevel(currentLevel);
 }
 
@@ -615,6 +577,8 @@ function LoadLevel(level) {
 			$("div#currentLevel").html(currentLevel);
 		} else if (currentLevel <= 43) {
 			$("div#currentLevel").html(currentLevel - 20);
+		} else if (currentLevel >= 100) {
+			$("div#currentLevel").html(currentLevel - 100);
 		} else {
 			$("div#currentLevel").html("*");
 		}
@@ -4849,9 +4813,6 @@ function LoadLevel43() {
     // This is a dummy level. This function is called when the user finishes the last level, not counting the challenge level.
 	$("button#levelSelect").click();
 }
-function LoadLevel100() {
-	LoadLevel43();
-}
 
 //CHALLENGE TASK
 function LoadLevel99() {
@@ -5121,153 +5082,407 @@ function LoadLevel99() {
 
     redraw();
 }
+function DrawStepsLevel99(){
+	var X1 = player.init_x - player.diameter / 2;
+    var Y1 = player.init_y - player.diameter / 2;
+    var width = player.diameter;
+    var height = player.diameter;
+    emptyCells = [
+        new EmptyCell(X1 + width * 2, Y1 - height * 2, width, height),
+        new EmptyCell(X1 + width * 6, Y1 - height * 2, width, height),
+        new EmptyCell(X1 + width * 2, Y1 - height * 1, width, height),
+        new EmptyCell(X1 + width * 6, Y1 - height * 1, width, height),
+        new EmptyCell(X1, Y1, width, height),
+        new EmptyCell(X1 + width * 1, Y1, width, height),
+        new EmptyCell(X1 + width * 2, Y1, width, height),
+        new EmptyCell(X1 + width * 3, Y1, width, height),
+        new EmptyCell(X1 + width * 4, Y1, width, height),
+        new EmptyCell(X1 + width * 5, Y1, width, height),
+        new EmptyCell(X1 + width * 6, Y1, width, height),
+        new EmptyCell(X1 + width * 2, Y1 + height * 1, width, height),
+        new EmptyCell(X1 + width * 6, Y1 + height * 1, width, height),
+        new EmptyCell(X1, Y1 + height * 2, width, height),
+        new EmptyCell(X1 + width * 1, Y1 + height * 2, width, height),
+        new EmptyCell(X1 + width * 2, Y1 + height * 2, width, height),
+        new EmptyCell(X1 + width * 5, Y1 + height * 2, width, height),
+        new EmptyCell(X1 + width * 6, Y1 + height * 2, width, height),
+        new EmptyCell(X1 + width * 2, Y1 + height * 3, width, height),
+        new EmptyCell(X1 + width * 3, Y1 + height * 3, width, height),
+        new EmptyCell(X1 + width * 4, Y1 + height * 3, width, height),
+        new EmptyCell(X1 + width * 5, Y1 + height * 3, width, height)
+    ];
+    stroke(255, 255, 255);
+    noFill();
+    for (var i = 0; i < emptyCells.length; i++) {
+        rect(emptyCells[i].x, emptyCells[i].y, emptyCells[i].width, emptyCells[i].height);
+    }
+    noStroke();
+}
 
-//function LoadLevel100(){
-//  if(currentLevel != 100){
-//    $("#instructionsModal .modal-body").html("<h3>Use the repeat block to reach the red circle</h3>");
-//    $("#instructionsModal").modal("show");
-//    currentLevel = 100;
-//    tipToShow = 1;
-//    numTipsUsed = 0;
-//    totalNumTips = 2;
-//    numSteps = 0;
-//  }
-//
-//  controls_whileUntil_options = [['repeat until', 'UNTIL'], ['repeat while', 'WHILE']];
-//
-//  player = new PlayerChallenge();
-//  player.init_x = 50;
-//  player.init_y = 200;
-//
-//  player.x = player.init_x;
-//  player.y = player.init_y;
-//
-//  target = new Target();
-//  target.y = player.y + player.diameter*1;
-//  target.x = player.x + player.diameter*4; //Position target three steps away from player
-//  target.color = color(153, 51, 0);
-//
-//  obstacles = [
-//    new Obstacle(player.x + player.diameter*2, player.y - player.diameter*2),
-//    new Obstacle(player.x + player.diameter*6, player.y - player.diameter*2),
-//
-//    new Obstacle(player.x + player.diameter*2, player.y - player.diameter*1),
-//    new Obstacle(player.x + player.diameter*6, player.y - player.diameter*1),
-//
-//    new Obstacle(player.x - player.diameter*1, player.y + player.diameter*0),
-//    new Obstacle(player.x - player.diameter*2, player.y + player.diameter*0),
-//    new Obstacle(player.x + player.diameter*3, player.y + player.diameter*0),
-//    new Obstacle(player.x - player.diameter*4, player.y + player.diameter*0),
-//    new Obstacle(player.x + player.diameter*5, player.y + player.diameter*0),
-//    new Obstacle(player.x - player.diameter*6, player.y + player.diameter*0),
-//
-//    new Obstacle(player.x + player.diameter*2, player.y + player.diameter*1),
-//    new Obstacle(player.x + player.diameter*6, player.y + player.diameter*1),
-//
-//    new Obstacle(player.x - player.diameter*0, player.y + player.diameter*2),
-//    new Obstacle(player.x - player.diameter*1, player.y + player.diameter*2),
-//    new Obstacle(player.x + player.diameter*2, player.y + player.diameter*2),
-//    new Obstacle(player.x + player.diameter*5, player.y + player.diameter*2),
-//    new Obstacle(player.x - player.diameter*6, player.y + player.diameter*2),
-//
-//    new Obstacle(player.x - player.diameter*2, player.y + player.diameter*3),
-//    new Obstacle(player.x + player.diameter*3, player.y + player.diameter*3),
-//    new Obstacle(player.x - player.diameter*4, player.y + player.diameter*3),
-//    new Obstacle(player.x + player.diameter*5, player.y + player.diameter*3)
-//  ];
-//
-//  Blockly.updateToolbox(
-//    '<xml id="toolbox" style="display: none">'+
-//
-//    '<block type="controls_whileUntil">' +
-//    '<field name="MODE">UNTIL</field>' +
-//    '<value name="BOOL">' +
-//    '<block ' +
-//    'movable="false" ' +
-//    'type="target">' +
-//    '</block>' +
-//    '</value>' +
-//    '</block>' +
-//
-//    '<block ' +
-//    'editable="false" ' +
-//    'type="controls_whileUntil">' +
-//    '<field name="MODE">WHILE</field>' +
-//    '<value name="BOOL">' +
-//    '<block ' +
-//    'movable="false" ' +
-//    'type="empty_cell">' +
-//    '</block>' +
-//    '</value>' +
-//    '</block>' +
-//
-//    '<block type="controls_if">'+
-//    '<mutation else="1"></mutation>' +
-//    '<value name="IF0">' +
-//    '<block ' +
-//    'movable="false" ' +
-//    'type="empty_cell_left">'+
-//    '</block>'+
-//    '</value>'+
-//    '</block>'+
-//
-//    '<block type="controls_if">'+
-//    '<value name="IF0">' +
-//    '<block ' +
-//    'movable="false" ' +
-//    'type="empty_cell_right">'+
-//    '</block>'+
-//    '</value>'+
-//    '</block>'+
-//
-//    '<block type="turn_left"></block>'+
-//    '<block type="turn_right"></block>'+
-//    '<block type="forward"></block>'+
-//
-//    '</xml>'
-//  );
-//
-//  $("#tipModal1 .modal-body").html(
-//    '<h3>To write the best code, you should solve the problem using 3 or less blocks. If you can\'t do it the first time, just come back later and try again.</h3>'
-//  );
-//  $("#tipModal2 .modal-body").html(
-//    '<h4>Try using the "Repeat" block with a "Walk" block inside. Change the number to change the number of times to repeat.</h4>'+
-//    '<h4>Connect the visual blocks in the right way to get the smiley face moving. Try using the "Repeat" and "Walk" blocks.</h4>'+
-//    '<div class="row">'+
-//    '<div class="col-xs-5">'+
-//    '<img src="../images/repeat9.png">'+
-//    '</div>'+
-//    '<div class="col-xs-7">'+
-//    '<h4>Repeats the blocks in this "Repeat" block 9 times. The "Repeat" block is useful when you want to run the same code again and again. You can connect the "Walk" and "Jump" blocks inside it. You can also change the number of times you want to repeat the code.</h4>'+
-//    '</div>'+
-//    '</div>'+
-//    '<div class="row">'+
-//    '<div class="col-xs-5">'+
-//    '<img src="../images/walk.png">'+
-//    '</div>'+
-//    '<div class="col-xs-7">'+
-//    '<h4>Each Walk block moves the smiley face one space to the right.</h4>'+
-//    '</div>'+
-//    '</div>'
-//  );
-//
-//  $("button#newBlockTip").show();
-//  $("#newBlockModal .modal-body").html(
-//    '<div class="row">'+
-//    '<div class="col-xs-5">'+
-//    '<img src="../images/repeat9.png">'+
-//    '</div>'+
-//    '<div class="col-xs-7">'+
-//    '<h3>The "Repeat" block makes the smiley face repeat whatever blocks are connected inside of it.</h3>'+
-//    '</div>'+
-//    '</div>'
-//  );
-//
-//  //Insert Start block in workspace
-//  InsertBlock("start", 200, 20, false, true);
-//
-//  redraw();
-//}
+function LoadLevel100(){
+	// Bump the game to Level 102 because there is no 100 or 101.
+	LoadLevel102();
+}
+
+// The following functions make it easy to create challenge levels.
+// This is a map of paths. The path is the set of white squares that mark the locations
+// that the player is allowed to be. If the player moves off of the path, the level is
+// immediately considered not solved and the user's Blockly program stops executing.
+window.ChallengePaths = {};
+// This function takes a list of coordinates and turns it into the emptyCells list.
+// Each coordinate is the number of squares offset from the player's initial position.
+// Each EmptyCell becomes a white square that indicates where the player is allowed to go.
+function ChallengePathToEmptyCells(cells){
+	var i, result = [];
+	for(i = 0; i < cells.length; i++){
+		result.push(new EmptyCell(player.init_x + player.diameter * (cells[i].x - 0.5), player.init_y + player.diameter * (cells[i].y - 0.5), player.diameter, player.diameter));
+	}
+	return result;
+}
+// This function takes a list of coordinates and returns a list of obstacles.
+// The obstacles surround the white squares and are responsible for detecting when
+// the player strays from the white squares.
+function ChallengePathToObstacles(cells){
+	var i, j, newObstacle, cellKey, obstacleKey, result = [],
+		obstaclesCoords = [], obstaclesCoordsInverse = {},
+		cellCoordsInverse = {},
+		cellToObstacleOffsets = [
+			{x: -1, y: 0}, // Left
+			{x: 0, y: -1}, // Top
+			{x: 1, y: 0}, // Right
+			{x: 0, y: 1}, // Bottom
+		],
+		xyToMapKey = function(coord){
+			return coord.x + "," + coord.y;
+		};
+	// Loop through each cell.
+	for(i = 0; i < cells.length; i++){
+		// Add this cell to the map of discovered cells.
+		cellKey = xyToMapKey(cells[i]);
+		cellCoordsInverse[cellKey] = true;
+		// Add an obstacle on the top, bottom, left, and right.
+		for(j = 0; j < cellToObstacleOffsets.length; j++){
+			newObstacle = {
+				x: cells[i].x + cellToObstacleOffsets[j].x,
+				y: cells[i].y + cellToObstacleOffsets[j].y
+			};
+			// Do not add an obstacle in a location where a cell already exists,
+			// and do not add duplicate obstacles.
+			obstacleKey = xyToMapKey(newObstacle);
+			if(!cellCoordsInverse[obstacleKey] && typeof obstaclesCoordsInverse[obstacleKey] != "number"){
+				obstaclesCoordsInverse[obstacleKey] = obstaclesCoords.length;
+				obstaclesCoords.push(newObstacle);
+			}
+		}
+		// If an obstacle is in the location of this cell, nullify that obstacle.
+		if(typeof obstaclesCoordsInverse[cellKey] == "number"){
+			obstaclesCoords[obstaclesCoordsInverse[cellKey]] = null;
+		}
+	}
+	// Now, convert the list of obstacle coordinates into actual obstacles.
+	for(i = 0; i < obstaclesCoords.length; i++){
+		if(obstaclesCoords[i]){
+			result.push(new ObstacleChallenge(
+				player.x + player.diameter * obstaclesCoords[i].x,
+				player.y + player.diameter * obstaclesCoords[i].y,
+				true
+			));
+		}
+	}
+	return result;
+}
+// This function should be called from a DrawStepsLevel function.
+function ChallengeDraw(emptyCells){
+    stroke(255, 255, 255);
+    noFill();
+    for(var i = 0; i < emptyCells.length; i++){
+        rect(emptyCells[i].x, emptyCells[i].y, emptyCells[i].width, emptyCells[i].height);
+    }
+    noStroke();
+}
+// This function returns a LoadLevel function.
+function ChallengeLoadLevelCallback(
+	thisLevel, // a number - the level number
+	instructions, // a string - what to show when the level is loaded
+	hints, // an array of strings - these become the hint texts
+	playerInitXAdjust, // a number - added to player's initial x position
+	playerInitYAdjust, // a number - added to player's initial y position
+	targetX, // a number - target is positioned this number of squares to the right of the player
+	targetY, // a number - target is positioned this number of squares beneath the player,
+	toolboxXML // a string - passed directly to Blockly to form the toolbox
+){
+	if(typeof ChallengePaths[thisLevel] != "object"){
+		console.error("ChallengeLoadLevelCallback error: the path for level " + thisLevel + "is not defined.");
+	}
+	if(!hints){
+		hints = ["Try again."];
+	}
+	return function(){
+		if(currentLevel != thisLevel){
+			$("#instructionsModal .modal-body").html("<h3>" +
+				(instructions || "Choose the right path to reach the red circle.") +
+			"</h3>");
+			$("#instructionsModal").modal("show");
+			currentLevel = thisLevel;
+			tipToShow = 1;
+			numTipsUsed = 0;
+			levelStartTime = Date.now();
+			totalNumTips = hints.length;
+			numSteps = 0;
+		}
+		// Create the player character.
+		player = new PlayerChallenge();
+		player.init_x += playerInitXAdjust;
+		player.init_y += playerInitYAdjust;
+		player.x = player.init_x;
+		player.y = player.init_y;
+		// Create the target.
+		target = new Target();
+		target.x = player.x + player.diameter * targetX;
+		target.y = player.y + player.diameter * targetY;
+		target.color = color(153, 51, 0);
+		// Surround the path with obstacles.
+		obstacles = ChallengePathToObstacles(ChallengePaths[thisLevel]);
+		// This level only has the forward block in the toolbox.
+		Blockly.updateToolbox(toolboxXML);
+		// Add up to five hints.
+		for(var i = 0; (i < hints.length) && (i < 5); i++){
+			$("#tipModal" + (i + 1) + " .modal-body").html("<h3>" + hints[i] + "</h3>");
+		}
+		$("button#newBlockTip").hide();
+		// Insert the On Start block and redraw.
+		InsertBlock("start", 200, 20, false, true);
+		redraw();
+	};
+}
+// This function returns a DrawStepsLevel function.
+function ChallengeDrawStepsCallback(thisLevel){
+	return function(){
+		ChallengeDraw(ChallengePathToEmptyCells(ChallengePaths[thisLevel]));
+	}
+}
+
+ChallengePaths[102] = (function(){
+	var cells = [];
+	for(var i = 0; i <= 5; i++){
+		cells.push({x: i, y: 0});
+	}
+	return cells;
+})();
+window.LoadLevel102 = ChallengeLoadLevelCallback(
+	102, null, null, 0, 0, 5, 0,
+	'<xml id="toolbox" style="display: none">' +
+		'<block type="forward"></block>' +
+	'</xml>'
+);
+window.DrawStepsLevel102 = ChallengeDrawStepsCallback(102);
+
+ChallengePaths[103] = [
+	{x: 0, y: 0},
+	{x: 1, y: 0},
+	{x: 1, y: -1},
+	{x: 2, y: -1}
+];
+window.LoadLevel103 = ChallengeLoadLevelCallback(
+	103, null, null, 0, 0, 2, -1,
+	'<xml id="toolbox" style="display: none">' +
+		'<block type="forward"></block>' +
+		'<block type="turn_left"></block>' +
+		'<block type="turn_right"></block>' +
+	'</xml>'
+);
+window.DrawStepsLevel103 = ChallengeDrawStepsCallback(103);
+
+function LoadLevel104(){
+	LoadLevel106();
+}
+
+ChallengePaths[106] = (function(){
+	var i, cells = [];
+	for(i = 1; i >= -5; i--){
+		cells.push({x: -i, y: i});
+		cells.push({x: 1 - i, y: i});
+	}
+	cells.push({x: 6, y: 6});
+	return cells;
+})();
+function LoadLevel106(){
+	ChallengeLoadLevelCallback(
+		106, null, null, 60, Math.max(windowHeight * 2 / 3, 420) - windowHeight / 2, 5, -5,
+		'<xml id="toolbox" style="display: none">' +
+			'<block type="controls_repeat">' +
+				'<field name="TIMES">5</field>' +
+			'</block>' +
+			'<block type="forward"></block>' +
+			'<block type="turn_left"></block>' +
+			'<block type="turn_right"></block>' +
+		'</xml>'
+	).apply(this, arguments);
+}
+window.DrawStepsLevel106 = ChallengeDrawStepsCallback(106);
+
+ChallengePaths[107] = (function(){
+	var cells = [];
+	for(var i = 0; i <= 5; i++){
+		cells.push({x: i, y: 0});
+	}
+	return cells;
+})();
+window.LoadLevel107 = ChallengeLoadLevelCallback(
+	107, null, null, 0, 0, 5, 0,
+	'<xml id="toolbox" style="display: none">' +
+		'<block type="controls_whileUntil">' +
+			'<field name="MODE">UNTIL</field>' +
+			'<value name="BOOL">' +
+				'<block movable="false" type="target"></block>' +
+			'</value>' +
+        '</block>' +
+		'<block type="forward"></block>' +
+		'<block type="turn_left"></block>' +
+		'<block type="turn_right"></block>' +
+	'</xml>'
+);
+window.DrawStepsLevel107 = ChallengeDrawStepsCallback(107);
+
+function LoadLevel108(){
+	LoadLevel109();
+}
+
+ChallengePaths[109] = (function(){
+	var i, cells = [];
+	for(i = 0; i <= 2; i++){
+		cells.push({x: i, y: 0});
+	}
+	for(i = 0; i >= -5; i--){
+		cells.push({x: 2, y: i});
+	}
+	return cells;
+})();
+window.LoadLevel109 = ChallengeLoadLevelCallback(
+	109, null, null, 0, 100, 2, -5,
+	'<xml id="toolbox" style="display: none">' +
+		'<block type="controls_whileUntil">' +
+			'<field name="MODE">UNTIL</field>' +
+			'<value name="BOOL">' +
+				'<block movable="false" type="target"></block>' +
+			'</value>' +
+        '</block>' +
+		'<block type="controls_if">' +
+			'<value name="IF0">' +
+				'<block movable="false" type="empty_cell_left"></block>' +
+			'</value>' +
+        '</block>' +
+		'<block type="forward"></block>' +
+		'<block type="turn_left"></block>' +
+	'</xml>'
+);
+window.DrawStepsLevel109 = ChallengeDrawStepsCallback(109);
+
+function LoadLevel110(){
+	LoadLevel111();
+}
+
+ChallengePaths[111] = (function(){
+	var i, cells = [
+		{x: 0, y: -3},
+		{x: 0, y: -2},
+		{x: 4, y: -3},
+		{x: 4, y: -2},
+		{x: 4, y: -1},
+		{x: 1, y: -2},
+		{x: 2, y: -2}
+	];
+	for(i = 0; i <= 4; i++){
+		cells.push({x: i, y: 0});
+		cells.push({x: i, y: -4});
+	}
+	return cells;
+})();
+window.LoadLevel111 = ChallengeLoadLevelCallback(
+	111, null, null, 0, 120, 2, -2,
+	'<xml id="toolbox" style="display: none">' +
+		'<block type="controls_whileUntil">' +
+			'<field name="MODE">UNTIL</field>' +
+			'<value name="BOOL">' +
+				'<block movable="false" type="target"></block>' +
+			'</value>' +
+        '</block>' +
+		'<block type="controls_whileUntil">' +
+			'<field name="MODE">WHILE</field>' +
+			'<value name="BOOL">' +
+				'<block movable="false" type="empty_cell"></block>' +
+			'</value>' +
+        '</block>' +
+		'<block type="controls_if">' +
+			'<value name="IF0">' +
+				'<block movable="false" type="empty_cell_left"></block>' +
+			'</value>' +
+        '</block>' +
+		'<block type="forward"></block>' +
+		'<block type="turn_left"></block>' +
+	'</xml>'
+);
+window.DrawStepsLevel111 = ChallengeDrawStepsCallback(111);
+
+function LoadLevel112(){
+	LoadLevel120();
+}
+
+ChallengePaths[120] = (function(){
+	var i, cells = [
+		{x: 2, y: 1},
+		{x: 2, y: 2},
+		{x: 4, y: -2},
+		{x: 4, y: -1},
+		{x: 6, y: -2},
+		{x: 6, y: -1}
+	];
+	for(i = 0; i <= 4; i++){
+		cells.push({x: i, y: 0});
+	}
+	for(i = 4; i <= 7; i++){
+		cells.push({x: i, y: -3});
+	}
+	return cells;
+})();
+window.LoadLevel120 = ChallengeLoadLevelCallback(
+	120, null, null, 0, 0, 7, -3,
+	'<xml id="toolbox" style="display: none">' +
+        '<block type="controls_whileUntil">' +
+			'<field name="MODE">UNTIL</field>' +
+			'<value name="BOOL">' +
+				'<block movable="false" type="target"></block>' +
+			'</value>' +
+        '</block>' +
+        '<block type="controls_if">' +
+			'<mutation else="1"></mutation>' +
+			'<value name="IF0">' +
+				'<block movable="false" type="empty_cell"></block>' +
+			'</value>' +
+        '</block>' +
+        '<block type="controls_if">' +
+			'<mutation else="1"></mutation>' +
+			'<value name="IF0">' +
+				'<block movable="false" type="empty_cell_left"></block>' +
+			'</value>' +
+        '</block>' +
+        '<block type="controls_if">' +
+			'<mutation else="1"></mutation>' +
+			'<value name="IF0">' +
+				'<block movable="false" type="empty_cell_right"></block>' +
+			'</value>' +
+        '</block>' +
+        '<block type="forward"></block>' +
+        '<block type="turn_left"></block>' +
+        '<block type="turn_right"></block>' +
+	'</xml>'
+);
+window.DrawStepsLevel120 = ChallengeDrawStepsCallback(120);
+
+function LoadLevel121(){
+	// Show the level selection menu.
+	LoadLevel43();
+}
 
 function insertCommasIntoNumber(theNumber, digitsPerGroup){
 	digitsPerGroup = digitsPerGroup || 3;
@@ -5537,9 +5752,9 @@ function CheckInvalidStates() {
         }
     }
 
-	// Check whether the player is beyond the target.
+	// Check whether the player is beyond the target, except in challenge levels.
 	// Check whether the character is stuck inside an infinite loop.
-	invalidState = (player.x >= (target.x + player.diameter)) || player.isStuckInInfiniteLoop || invalidState;
+	invalidState = invalidState || ((currentLevel < 99) && (player.x >= (target.x + player.diameter))) || player.isStuckInInfiniteLoop;
 
     if (invalidState) {
 		console.log("There are invalid states.");

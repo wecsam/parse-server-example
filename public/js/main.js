@@ -274,7 +274,7 @@ $( document ).ready(function() {
 			$("#levelSelectMenu1").hide();
 			$("#levelSelectMenu2").show();
 			$("#levelSelectMenuChallenge").hide();
-		}else if(challengesEnabled){
+		}else{
 			$("#levelSelectMenu1").hide();
 			$("#levelSelectMenu2").hide();
 			$("#levelSelectMenuChallenge").show();
