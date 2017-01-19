@@ -5185,7 +5185,7 @@ function ChallengePathToObstacles(cells){
 			result.push(new ObstacleChallenge(
 				player.x + player.diameter * obstaclesCoords[i].x,
 				player.y + player.diameter * obstaclesCoords[i].y,
-				true
+				false
 			));
 		}
 	}
