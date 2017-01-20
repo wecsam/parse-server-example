@@ -192,6 +192,7 @@ $( document ).ready(function() {
 		player.reset();
 	});
 	
+	// If there is a new block, automatically show the new block modal.
 	$('#instructionsModal').on('hidden.bs.modal', function(){
 		if($("#newBlockTip").is(":visible")){
 			$("#newBlockModal").modal("show");

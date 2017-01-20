@@ -5204,6 +5204,7 @@ function ChallengeDraw(emptyCells){
 function ChallengeLoadLevelCallback(
 	thisLevel, // a number - the level number
 	instructions, // a string - what to show when the level is loaded
+	newBlockInfo, // a string or null - information on any new code blocks
 	hints, // an array of strings - these become the hint texts
 	playerInitXAdjust, // a number - added to player's initial x position
 	playerInitYAdjust, // a number - added to player's initial y position
@@ -5249,7 +5250,13 @@ function ChallengeLoadLevelCallback(
 		for(var i = 0; (i < hints.length) && (i < 5); i++){
 			$("#tipModal" + (i + 1) + " .modal-body").html("<h3>" + hints[i] + "</h3>");
 		}
-		$("button#newBlockTip").hide();
+		// Insert the new block information.
+		if(newBlockInfo){
+			$("button#newBlockTip").show();
+			$("#newBlockModal .modal-body").html(newBlockInfo);
+		}else{
+			$("button#newBlockTip").hide();
+		}
 		// Insert the On Start block and redraw.
 		InsertBlock("start", 200, 20, false, true);
 		redraw();
@@ -5270,7 +5277,7 @@ ChallengePaths[102] = (function(){
 	return cells;
 })();
 window.LoadLevel102 = ChallengeLoadLevelCallback(
-	102, null, null, 0, 0, 5, 0,
+	102, null, null, null, 0, 0, 5, 0,
 	'<xml id="toolbox" style="display: none">' +
 		'<block type="forward"></block>' +
 	'</xml>'
@@ -5284,7 +5291,7 @@ ChallengePaths[103] = [
 	{x: 2, y: -1}
 ];
 window.LoadLevel103 = ChallengeLoadLevelCallback(
-	103, null, null, 0, 0, 2, -1,
+	103, null, null, null, 0, 0, 2, -1,
 	'<xml id="toolbox" style="display: none">' +
 		'<block type="forward"></block>' +
 		'<block type="turn_left"></block>' +
@@ -5308,7 +5315,7 @@ ChallengePaths[106] = (function(){
 })();
 function LoadLevel106(){
 	ChallengeLoadLevelCallback(
-		106, null, null, 60, Math.max(windowHeight * 2 / 3, 420) - windowHeight / 2, 5, -5,
+		106, null, null, null, 60, Math.max(windowHeight * 2 / 3, 420) - windowHeight / 2, 5, -5,
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="controls_repeat">' +
 				'<field name="TIMES">5</field>' +
@@ -5329,7 +5336,7 @@ ChallengePaths[107] = (function(){
 	return cells;
 })();
 window.LoadLevel107 = ChallengeLoadLevelCallback(
-	107, null, null, 0, 0, 5, 0,
+	107, null, null, null, 0, 0, 5, 0,
 	'<xml id="toolbox" style="display: none">' +
 		'<block type="controls_whileUntil">' +
 			'<field name="MODE">UNTIL</field>' +
@@ -5359,7 +5366,7 @@ ChallengePaths[109] = (function(){
 	return cells;
 })();
 window.LoadLevel109 = ChallengeLoadLevelCallback(
-	109, null, null, 0, 100, 2, -5,
+	109, null, null, null, 0, 100, 2, -5,
 	'<xml id="toolbox" style="display: none">' +
 		'<block type="controls_whileUntil">' +
 			'<field name="MODE">UNTIL</field>' +
@@ -5399,7 +5406,7 @@ ChallengePaths[111] = (function(){
 	return cells;
 })();
 window.LoadLevel111 = ChallengeLoadLevelCallback(
-	111, null, null, 0, 120, 2, -2,
+	111, null, null, null, 0, 120, 2, -2,
 	'<xml id="toolbox" style="display: none">' +
 		'<block type="controls_whileUntil">' +
 			'<field name="MODE">UNTIL</field>' +
@@ -5446,7 +5453,7 @@ ChallengePaths[120] = (function(){
 	return cells;
 })();
 window.LoadLevel120 = ChallengeLoadLevelCallback(
-	120, null, null, 0, 0, 7, -3,
+	120, null, null, null, 0, 0, 7, -3,
 	'<xml id="toolbox" style="display: none">' +
         '<block type="controls_whileUntil">' +
 			'<field name="MODE">UNTIL</field>' +
