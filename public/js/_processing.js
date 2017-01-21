@@ -5332,7 +5332,7 @@ function LoadLevel106(){
 		106, null, null, null, 60, Math.max(windowHeight * 2 / 3, 420) - windowHeight / 2, 5, -5,
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="controls_repeat">' +
-				'<field name="TIMES">5</field>' +
+				'<field name="TIMES">3</field>' +
 			'</block>' +
 			'<block type="forward"></block>' +
 			'<block type="turn_left"></block>' +
@@ -5451,6 +5451,9 @@ function LoadLevel112(){
 
 ChallengePaths[120] = (function(){
 	var i, cells = [
+		{x: 1, y: -3},
+		{x: 1, y: -2},
+		{x: 1, y: -1},
 		{x: 2, y: 1},
 		{x: 2, y: 2},
 		{x: 4, y: -2},
@@ -5496,7 +5499,12 @@ window.LoadLevel120 = ChallengeLoadLevelCallback(
         '<block type="forward"></block>' +
         '<block type="turn_left"></block>' +
         '<block type="turn_right"></block>' +
-	'</xml>'
+	'</xml>',
+	[
+		{x: 1, y: -3},
+		{x: 2, y: 2},
+		{x: 6, y: -1}
+	]
 );
 window.DrawStepsLevel120 = ChallengeDrawStepsCallback(120);
 
