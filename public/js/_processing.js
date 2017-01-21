@@ -5226,6 +5226,7 @@ function ChallengeLoadLevelCallback(
 	toolboxXML, // a string - passed directly to Blockly to form the toolbox
 	additionalVisibleObstacles // an array - passed directly to ChallengePathToObstacles
 ){
+	var MAX_NUM_HINTS = 5;
 	if(typeof ChallengePaths[thisLevel] != "object"){
 		console.error("ChallengeLoadLevelCallback error: the path for level " + thisLevel + "is not defined.");
 	}
@@ -5242,7 +5243,7 @@ function ChallengeLoadLevelCallback(
 			tipToShow = 1;
 			numTipsUsed = 0;
 			levelStartTime = Date.now();
-			totalNumTips = hints.length;
+			totalNumTips = Math.min(hints.length, MAX_NUM_HINTS);
 			numSteps = 0;
 		}
 		// Create the player character.
@@ -5261,8 +5262,8 @@ function ChallengeLoadLevelCallback(
 		// This level only has the forward block in the toolbox.
 		Blockly.updateToolbox(toolboxXML);
 		// Add up to five hints.
-		for(var i = 0; (i < hints.length) && (i < 5); i++){
-			$("#tipModal" + (i + 1) + " .modal-body").html("<h3>" + hints[i] + "</h3>");
+		for(var i = 0; (i < hints.length) && (i < MAX_NUM_HINTS); i++){
+			$("#tipModal" + (i + 1) + " .modal-body").html(hints[i]);
 		}
 		// Insert the new block information.
 		if(newBlockInfo){
@@ -5291,7 +5292,52 @@ ChallengePaths[102] = (function(){
 	return cells;
 })();
 window.LoadLevel102 = ChallengeLoadLevelCallback(
-	102, null, null, null, 0, 0, 5, 0,
+	102,
+	"Collect a power cell on the way to the moon base.",
+	'<div class="row">' +
+		'<div class="col-xs-3 help-block-image">' +
+			'<img src="../images/forward.png">' +
+		'</div>' +
+		'<div class="col-xs-9 help-block-text">' +
+			'<h3>Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward to the next space on the path.</h3>' +
+		'</div>' +
+	'</div>',
+	[
+		'<h3>' +
+			"Solve the puzzle using six blocks or fewer on your first try to earn three stars. " +
+			"If you don&rsquo;t get all three stars the first time, try again later." +
+		'</h3>',
+		'<h3>' +
+			"Try connecting more than one &ldquo;forward&rdquo; block to reach the power cell." +
+		'</h3>',
+		'<h3>' +
+			"You need to program the rocket ship to reach the power cell." +
+			"Connect the blocks to move the ship." +
+			"Try using many &ldquo;forward&rdquo; blocks." +
+		'</h3>' +
+		'<div class="row">' +
+			'<div class="col-xs-3 help-block-image">' +
+				'<img src="../images/start.png">' +
+			'</div>' +
+			'<div class="col-xs-9 help-block-text">' +
+				'<h3>' +
+					"This is the first block of your program. Add blocks under this one." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-3 help-block-image">' +
+				'<img src="../images/forward.png">' +
+			'</div>' +
+			'<div class="col-xs-9 help-block-text">' +
+				'<h3>' +
+					"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+				'</h3>' +
+			'</div>' +
+		'</div>'
+	],
+	0, 0,
+	5, 0,
 	'<xml id="toolbox" style="display: none">' +
 		'<block type="forward"></block>' +
 	'</xml>'
@@ -5305,7 +5351,71 @@ ChallengePaths[103] = [
 	{x: 2, y: -1}
 ];
 window.LoadLevel103 = ChallengeLoadLevelCallback(
-	103, null, null, null, 0, 0, 2, -1,
+	103,
+	"Get more power cells to get to the moon base quickly.",
+	'<div class="row">' +
+		'<div class="col-xs-3 help-block-image">' +
+			'<img src="../images/turn_left.png">' +
+		'</div>' +
+		'<div class="col-xs-9 help-block-text">' +
+			'<h3>Each &ldquo;turn left&rdquo; block makes the rocket ship turn to the left.</h3>' +
+		'</div>' +
+	'</div>' +
+	'<div class="row">' +
+		'<div class="col-xs-3 help-block-image">' +
+			'<img src="../images/turn_right.png">' +
+		'</div>' +
+		'<div class="col-xs-9 help-block-text">' +
+			'<h3>Each &ldquo;turn right&rdquo; block makes the rocket ship turn to the right.</h3>' +
+		'</div>' +
+	'</div>',
+	[
+		'<h3>' +
+			"Solve the puzzle using six blocks or fewer on your first try to earn three stars. " +
+			"If you don&rsquo;t get all three stars the first time, try again later." +
+		'</h3>',
+		'<h3>' +
+			"Try using the &ldquo;turn left&rdquo; and &ldquo;turn right&rdquo; blocks with " +
+			"the &ldquo;forward&rdquo; block to reach the power cell." +
+		'</h3>',
+		'<h3>' +
+			"Program the rocket ship to reach the power cell. " +
+			"Connect the blocks to move the ship. " +
+			"Try using the &ldquo;forward,&rdquo; &ldquo;turn right,&rdquo; and &ldquo;turn left&rdquo; blocks." +
+		'</h3>' +
+		'<div class="row">' +
+			'<div class="col-xs-3 help-block-image">' +
+				'<img src="../images/start.png">' +
+			'</div>' +
+			'<div class="col-xs-9 help-block-text">' +
+				'<h3>' +
+					"This is the first block of your program. Add blocks under this one." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-3 help-block-image">' +
+				'<img src="../images/forward.png">' +
+			'</div>' +
+			'<div class="col-xs-9 help-block-text">' +
+				'<h3>' +
+					"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-3 help-block-image">' +
+				'<img src="../images/turn_left.png">' +
+			'</div>' +
+			'<div class="col-xs-9 help-block-text">' +
+				'<h3>' +
+					"Each &ldquo;turn left&rdquo; block makes the rocket ship turn to the left." +
+				'</h3>' +
+			'</div>' +
+		'</div>'
+	],
+	0, 0,
+	2, -1,
 	'<xml id="toolbox" style="display: none">' +
 		'<block type="forward"></block>' +
 		'<block type="turn_left"></block>' +
@@ -5329,7 +5439,71 @@ ChallengePaths[106] = (function(){
 })();
 function LoadLevel106(){
 	ChallengeLoadLevelCallback(
-		106, null, null, null, 60, Math.max(windowHeight * 2 / 3, 420) - windowHeight / 2, 5, -5,
+		106,
+		"Find the power cell by making lots of turns in a repeat loop.",
+		null,
+		[
+			'<h3>' +
+				"Solve the puzzle using six blocks or fewer on your first try to earn three stars. " +
+				"If you don&rsquo;t get all three stars the first time, try again later." +
+			'</h3>',
+			'<h3>' +
+				"Try connecting the &ldquo;forward,&rdquo; &ldquo;turn right,&rdquo; and " +
+				"&ldquo;turn left&rdquo; blocks to the &ldquo;repeat&rdquo; block to make the rocket ship go forward." +
+			'</h3>',
+			'<h3>' +
+				"Try changing the value of the &ldquo;repeat&rdquo; block to make the rocket ship reach the power cell." +
+			'</h3>',
+			'<h3>' +
+				"Program the rocket ship to reach the power cell. " +
+				"Connect the blocks to move the ship. " +
+				"Try using many &ldquo;forward,&rdquo; &ldquo;turn right,&rdquo; and &ldquo;turn left&rdquo; blocks " +
+				"inside the &ldquo;repeat&rdquo; block." +
+			'</h3>' +
+			'<div class="row">' +
+				'<div class="col-xs-3 help-block-image">' +
+					'<img src="../images/repeat3.png">' +
+				'</div>' +
+				'<div class="col-xs-9 help-block-text">' +
+					'<h3>' +
+						"Repeat the blocks in this &ldquo;repeat&rdquo; block three times. " +
+						"The &ldquo;repeat&rdquo; block is useful when you want to run the same code again and again. " +
+						"You can connect the &ldquo;forward&rdquo; and &ldquo;turn&rdquo; blocks inside it. " +
+						"You can also change the number of times you want to repeat the code." +
+					'</h3>' +
+				'</div>' +
+			'</div>' +
+			'<div class="row">' +
+				'<div class="col-xs-3 help-block-image">' +
+					'<img src="../images/forward.png">' +
+				'</div>' +
+				'<div class="col-xs-9 help-block-text">' +
+					'<h3>' +
+						"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+					'</h3>' +
+				'</div>' +
+			'</div>' +
+			'<div class="row">' +
+				'<div class="col-xs-3 help-block-image">' +
+					'<img src="../images/turn_left.png">' +
+				'</div>' +
+				'<div class="col-xs-9 help-block-text">' +
+					'<h3>Each &ldquo;turn left&rdquo; block makes the rocket ship turn to the left.</h3>' +
+				'</div>' +
+			'</div>' +
+			'<div class="row">' +
+				'<div class="col-xs-3 help-block-image">' +
+					'<img src="../images/turn_right.png">' +
+				'</div>' +
+				'<div class="col-xs-9 help-block-text">' +
+					'<h3>' +
+						"Each &ldquo;turn right&rdquo; block makes the rocket ship turn to the right." +
+					'</h3>' +
+				'</div>' +
+			'</div>'
+		],
+		60, Math.max(windowHeight * 2 / 3, 420) - windowHeight / 2,
+		5, -5,
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="controls_repeat">' +
 				'<field name="TIMES">3</field>' +
@@ -5350,7 +5524,59 @@ ChallengePaths[107] = (function(){
 	return cells;
 })();
 window.LoadLevel107 = ChallengeLoadLevelCallback(
-	107, null, null, null, 0, 0, 5, 0,
+	107,
+	"Collect the power cell using the &ldquo;repeat until&rdquo; conditional loop.",
+	'<div class="row">' +
+		'<div class="col-xs-4 help-block-image">' +
+			'<img src="../images/repeat_until_target.png">' +
+		'</div>' +
+		'<div class="col-xs-8 help-block-text">' +
+			'<h3>' +
+				"Repeat the blocks in this &ldquo;repeat until&rdquo; until the rocket ship reaches the power cell. " +
+				"The &ldquo;repeat until&rdquo; block is useful when you want to run the same code again and again " +
+				"until the goal is reached. In this case the goal is the power cell. " +
+				"You can connect the &ldquo;forward&rdquo; block inside it." +
+			'</h3>' +
+		'</div>' +
+	'</div>',
+	[
+		'<h3>' +
+			"Solve the puzzle using three blocks or fewer on your first try to earn three stars. " +
+			"If you don&rsquo;t get all three stars the first time, try again later." +
+		'</h3>',
+		'<h3>' +
+			"Try connecting the &ldquo;forward&rdquo; blocks to the &ldquo;repeat until&rdquo; block." +
+		'</h3>',
+		'<h3>' +
+			"Program the rocket ship to reach the power cell. " +
+			"Try connecting &ldquo;forward&rdquo; blocks to the &ldquo;repeat until&rdquo; block." +
+		'</h3>' +
+		'<div class="row">' +
+			'<div class="col-xs-5 help-block-image">' +
+				'<img src="../images/repeat_until_target.png">' +
+			'</div>' +
+			'<div class="col-xs-7 help-block-text">' +
+				'<h3>' +
+					"Repeat the blocks in this &ldquo;repeat until&rdquo; unil the rocket ship reaches the power cell. " +
+					"The &ldquo;repeat until&rdquo; block is useful when you want to run the same code again and again " +
+					"until the goal is reached. In this case the goal is the power cell. " +
+					"You can connect the &ldquo;forward&rdquo; block inside it." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-5 help-block-image">' +
+				'<img src="../images/forward.png">' +
+			'</div>' +
+			'<div class="col-xs-7 help-block-text">' +
+				'<h3>' +
+					"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+				'</h3>' +
+			'</div>' +
+		'</div>'
+	],
+	0, 0,
+	5, 0,
 	'<xml id="toolbox" style="display: none">' +
 		'<block type="controls_whileUntil">' +
 			'<field name="MODE">UNTIL</field>' +
@@ -5380,7 +5606,77 @@ ChallengePaths[109] = (function(){
 	return cells;
 })();
 window.LoadLevel109 = ChallengeLoadLevelCallback(
-	109, null, null, null, 0, 100, 2, -5,
+	109,
+	"Go to the power cell with conditions and turns.",
+	'<div class="row">' +
+		'<div class="col-xs-3 help-block-image">' +
+			'<img src="../images/if_path_left.png">' +
+		'</div>' +
+		'<div class="col-xs-9 help-block-text">' +
+			'<h3>' +
+				"Run the blocks in this &ldquo;if&rdquo; only if there is a path to the left ahead." +
+			'</h3>' +
+		'</div>' +
+	'</div>',
+	[
+		'<h3>' +
+			"Solve the puzzle using five blocks or fewer on your first try to earn three stars. " +
+			"If you don&rsquo;t get all three stars the first time, try again later." +
+		'</h3>',
+		'<h3>' +
+			"Try using the &ldquo;repeat until&rdquo; block until the rocket ship reaches the power cell." +
+		'</h3>',
+		'<h3>' +
+			"Try using the &ldquo;turn left&rdquo; if there is a path to the left." +
+		'</h3>',
+		'<h3>' +
+			"Program the rocket ship to reach the power cell. Connect the blocks to move the ship. " +
+			"Try using the &ldquo;repeat until&rdquo; &ldquo;left turn&rdquo; and &ldquo;forward&rdquo; blocks." +
+		'</h3>' +
+		'<div class="row">' +
+			'<div class="col-xs-5 help-block-image">' +
+				'<img src="../images/repeat_until_target.png">' +
+			'</div>' +
+			'<div class="col-xs-7 help-block-text">' +
+				'<h3>' +
+					"Repeat the blocks in this &ldquo;repeat until&rdquo; unil the rocket ship reaches the power cell. " +
+					"The &ldquo;repeat until&rdquo; block is useful when you want to run the same code again and again " +
+					"until the goal is reached. In this case the goal is the power cell. " +
+					"You can connect the &ldquo;forward,&rdquo; &ldquo;if,&rdquo; and &ldquo;turn left&rdquo; blocks inside it." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-4 help-block-image">' +
+				'<img src="../images/if_path_left.png">' +
+			'</div>' +
+			'<div class="col-xs-8 help-block-text">' +
+				'<h3>' +
+					"Run the blocks in this &ldquo;if&rdquo; only if there is a path to the left ahead." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-3 help-block-image">' +
+				'<img src="../images/forward.png">' +
+			'</div>' +
+			'<div class="col-xs-9 help-block-text">' +
+				'<h3>' +
+					"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-3 help-block-image">' +
+				'<img src="../images/turn_left.png">' +
+			'</div>' +
+			'<div class="col-xs-9 help-block-text">' +
+				'<h3>Each &ldquo;turn left&rdquo; block makes the rocket ship turn to the left.</h3>' +
+			'</div>' +
+		'</div>'
+	],
+	0, 100,
+	2, -5,
 	'<xml id="toolbox" style="display: none">' +
 		'<block type="controls_whileUntil">' +
 			'<field name="MODE">UNTIL</field>' +
@@ -5420,7 +5716,83 @@ ChallengePaths[111] = (function(){
 	return cells;
 })();
 window.LoadLevel111 = ChallengeLoadLevelCallback(
-	111, null, null, null, 0, 120, 2, -2,
+	111,
+	"Collect the power cell with more conditions and left turns.",
+	null,
+	[
+		'<h3>' +
+			"Solve the puzzle using five blocks or fewer on your first try to earn three stars. " +
+			"If you don&rsquo;t get all three stars the first time, try again later." +
+		'</h3>',
+		'<h3>' +
+			"Try using the &ldquo;repeat until&rdquo; or &ldquo;repeat while&rdquo; block " +
+			"until the rocket ship reaches the power cell." +
+		'</h3>',
+		'<h3>' +
+			"Try using the &ldquo;turn left&rdquo; if there is a path to the left." +
+		'</h3>',
+		'<h3>' +
+			"Program the rocket ship to reach the power cell. Connect the blocks to move the ship. " +
+			"Try using the &ldquo;repeat until&rdquo; or &ldquo;repeat while&rdquo; with " +
+			"the &ldquo;left turn&rdquo; and &ldquo;forward&rdquo; blocks." +
+		'</h3>' +
+		'<div class="row">' +
+			'<div class="col-xs-5 help-block-image">' +
+				'<img src="../images/repeat_until_target.png">' +
+			'</div>' +
+			'<div class="col-xs-7 help-block-text">' +
+				'<h3>' +
+					"Repeat the blocks in this &ldquo;repeat until&rdquo; unil the rocket ship reaches the power cell. " +
+					"The &ldquo;repeat until&rdquo; block is useful when you want to run the same code again and again " +
+					"until the goal is reached. In this case the goal is the power cell. " +
+					"You can connect the &ldquo;forward,&rdquo; &ldquo;if,&rdquo; and &ldquo;turn left&rdquo; blocks inside it." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-5 help-block-image">' +
+				'<img src="../images/repeat_while_path_front.png">' +
+			'</div>' +
+			'<div class="col-xs-7 help-block-text">' +
+				'<h3>' +
+					"Repeat the blocks in this &ldquo;repeat with&rdquo; while there is a path in front of the rocket ship. " +
+					"The &ldquo;repeat while&rdquo; block is useful when you want to run the same code again and again " +
+					"while a condition is true.  You can connect the &ldquo;forward,&rdquo; &ldquo;if,&rdquo; " +
+					"and &ldquo;turn left&rdquo; blocks inside it." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-4 help-block-image">' +
+				'<img src="../images/if_path_left.png">' +
+			'</div>' +
+			'<div class="col-xs-8 help-block-text">' +
+				'<h3>' +
+					"Run the blocks in this &ldquo;if&rdquo; only if there is a path to the left ahead." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-3 help-block-image">' +
+				'<img src="../images/forward.png">' +
+			'</div>' +
+			'<div class="col-xs-9 help-block-text">' +
+				'<h3>' +
+					"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-3 help-block-image">' +
+				'<img src="../images/turn_left.png">' +
+			'</div>' +
+			'<div class="col-xs-9 help-block-text">' +
+				'<h3>Each &ldquo;turn left&rdquo; block makes the rocket ship turn to the left.</h3>' +
+			'</div>' +
+		'</div>'
+	],
+	0, 120,
+	2, -2,
 	'<xml id="toolbox" style="display: none">' +
 		'<block type="controls_whileUntil">' +
 			'<field name="MODE">UNTIL</field>' +
@@ -5470,7 +5842,109 @@ ChallengePaths[120] = (function(){
 	return cells;
 })();
 window.LoadLevel120 = ChallengeLoadLevelCallback(
-	120, null, null, null, 0, 0, 7, -3,
+	120, 
+	"Collect the power cell with more conditions and left turns.",
+	null,
+	[
+		'<h3>' +
+			"Solve the puzzle using eight blocks or fewer on your first try to earn three stars. " +
+			"If you don&rsquo;t get all three stars the first time, try again later." +
+		'</h3>',
+		'<h3>' +
+			"Try using the &ldquo;repeat until&rdquo; block until the rocket ship reaches the power cell." +
+		'</h3>',
+		'<h3>' +
+			"Try using the &ldquo;forward&rdquo; if there is a path in front." +
+		'</h3>',
+		'<h3>' +
+			"Try using the &ldquo;turn left&rdquo; if there is a path to the left." +
+		'</h3>',
+		'<h3>' +
+			"Try using the &ldquo;turn right&rdquo; if there is a path to the right." +
+		'</h3>',
+		'<h3>' +
+			"Program the rocket ship to reach the power cell. Connect the blocks to move the ship. " +
+			"Try using the &ldquo;repeat until&rdquo;, &ldquo;turn left,&rdquo; &ldquo;turn right,&rdquo; " +
+			"and &ldquo;forward&rdquo; blocks." +
+		'</h3>' +
+		'<div class="row">' +
+			'<div class="col-xs-5 help-block-image">' +
+				'<img src="../images/repeat_until_target.png">' +
+			'</div>' +
+			'<div class="col-xs-7 help-block-text">' +
+				'<h3>' +
+					"Repeat the blocks in this &ldquo;repeat until&rdquo; unil the rocket ship reaches the power cell. " +
+					"The &ldquo;repeat until&rdquo; block is useful when you want to run the same code again and again " +
+					"until the goal is reached. In this case the goal is the power cell. " +
+					"You can connect the &ldquo;forward,&rdquo; &ldquo;if,&rdquo; &ldquo;turn left,&rdquo; and " +
+					"&ldquo;turn right&rdquo; blocks inside it." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-4 help-block-image">' +
+				'<img src="../images/if_path_in_front_then_else.png">' +
+			'</div>' +
+			'<div class="col-xs-8 help-block-text">' +
+				'<h3>' +
+					"Run the blocks in this &ldquo;if&rdquo; only if there is a path to the front. " +
+					"Otherwise, run the blocks in the &ldquo;else&rdquo; section." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-4 help-block-image">' +
+				'<img src="../images/if_path_left_then_else.png">' +
+			'</div>' +
+			'<div class="col-xs-8 help-block-text">' +
+				'<h3>' +
+					"Run the blocks in this &ldquo;if&rdquo; only if there is a path to the left ahead. " +
+					"Otherwise, run the blocks in the &ldquo;else&rdquo; section." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-4 help-block-image">' +
+				'<img src="../images/if_path_right_then_else.png">' +
+			'</div>' +
+			'<div class="col-xs-8 help-block-text">' +
+				'<h3>' +
+					"Run the blocks in this &ldquo;if&rdquo; only if there is a path to the right ahead. " +
+					"Otherwise, run the blocks in the &ldquo;else&rdquo; section." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-3 help-block-image">' +
+				'<img src="../images/forward.png">' +
+			'</div>' +
+			'<div class="col-xs-9 help-block-text">' +
+				'<h3>' +
+					"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+				'</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-3 help-block-image">' +
+				'<img src="../images/turn_left.png">' +
+			'</div>' +
+			'<div class="col-xs-9 help-block-text">' +
+				'<h3>Each &ldquo;turn left&rdquo; block makes the rocket ship turn to the left.</h3>' +
+			'</div>' +
+		'</div>' +
+		'<div class="row">' +
+			'<div class="col-xs-3 help-block-image">' +
+				'<img src="../images/turn_right.png">' +
+			'</div>' +
+			'<div class="col-xs-9 help-block-text">' +
+				'<h3>' +
+					"Each &ldquo;turn right&rdquo; block makes the rocket ship turn to the right." +
+				'</h3>' +
+			'</div>' +
+		'</div>'
+	],
+	0, 0,
+	7, -3,
 	'<xml id="toolbox" style="display: none">' +
         '<block type="controls_whileUntil">' +
 			'<field name="MODE">UNTIL</field>' +

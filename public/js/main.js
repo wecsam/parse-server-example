@@ -243,7 +243,7 @@ $( document ).ready(function() {
 	});
 
 	$("#newBlockTip").click(function(){
-		console.log("New Hint modal requested from menu", tipToShow);
+		console.log("New block modal requested from menu", tipToShow);
 
 		if(!$.isEmptyObject(CURRENT_USER)){
 			var HintRequested = Parse.Object.extend("HintRequested");
