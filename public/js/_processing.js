@@ -5139,10 +5139,13 @@ function ChallengePathToEmptyCells(cells){
 	}
 	return result;
 }
-// This function takes a list of coordinates and returns a list of obstacles.
+// This function takes an array of coordinates and returns an array of obstacles.
 // The obstacles surround the white squares and are responsible for detecting when
 // the player strays from the white squares.
-function ChallengePathToObstacles(cells){
+// You can add additional visible obstacles through additionalVisibleObstacles as
+// an array of coordinates.
+// All of the input coordinates are the number of squares relative to the player.
+function ChallengePathToObstacles(cells, additionalVisibleObstacles){
 	var i, j, newObstacle, cellKey, obstacleKey, result = [],
 		obstaclesCoords = [], obstaclesCoordsInverse = {},
 		cellCoordsInverse = {},
@@ -5180,13 +5183,23 @@ function ChallengePathToObstacles(cells){
 		}
 	}
 	// Now, convert the list of obstacle coordinates into actual obstacles.
+	var coordsToObstacleChallenge = function(coords, visible){
+		// The square-based coordinates are converted to pixel coordinates here.
+		return new ObstacleChallenge(
+			player.x + player.diameter * coords.x,
+			player.y + player.diameter * coords.y,
+			visible
+		)
+	}
 	for(i = 0; i < obstaclesCoords.length; i++){
 		if(obstaclesCoords[i]){
-			result.push(new ObstacleChallenge(
-				player.x + player.diameter * obstaclesCoords[i].x,
-				player.y + player.diameter * obstaclesCoords[i].y,
-				false
-			));
+			result.push(coordsToObstacleChallenge(obstaclesCoords[i], false));
+		}
+	}
+	// Add in the additional visible obstacles.
+	if(typeof additionalVisibleObstacles == "object"){
+		for(i = 0; i < additionalVisibleObstacles.length; i++){
+			result.push(coordsToObstacleChallenge(additionalVisibleObstacles[i], true));
 		}
 	}
 	return result;
@@ -5210,7 +5223,8 @@ function ChallengeLoadLevelCallback(
 	playerInitYAdjust, // a number - added to player's initial y position
 	targetX, // a number - target is positioned this number of squares to the right of the player
 	targetY, // a number - target is positioned this number of squares beneath the player,
-	toolboxXML // a string - passed directly to Blockly to form the toolbox
+	toolboxXML, // a string - passed directly to Blockly to form the toolbox
+	additionalVisibleObstacles // an array - passed directly to ChallengePathToObstacles
 ){
 	if(typeof ChallengePaths[thisLevel] != "object"){
 		console.error("ChallengeLoadLevelCallback error: the path for level " + thisLevel + "is not defined.");
@@ -5243,7 +5257,7 @@ function ChallengeLoadLevelCallback(
 		target.y = player.y + player.diameter * targetY;
 		target.color = color(153, 51, 0);
 		// Surround the path with obstacles.
-		obstacles = ChallengePathToObstacles(ChallengePaths[thisLevel]);
+		obstacles = ChallengePathToObstacles(ChallengePaths[thisLevel], additionalVisibleObstacles);
 		// This level only has the forward block in the toolbox.
 		Blockly.updateToolbox(toolboxXML);
 		// Add up to five hints.
