@@ -5627,7 +5627,7 @@ window.LoadLevel109 = ChallengeLoadLevelCallback(
 			"Try using the &ldquo;repeat until&rdquo; block until the rocket ship reaches the power cell." +
 		'</h3>',
 		'<h3>' +
-			"Try using the &ldquo;turn left&rdquo; if there is a path to the left." +
+			"Try using the &ldquo;turn left&rdquo; block if there is a path to the left." +
 		'</h3>',
 		'<h3>' +
 			"Program the rocket ship to reach the power cell. Connect the blocks to move the ship. " +
@@ -5729,7 +5729,7 @@ window.LoadLevel111 = ChallengeLoadLevelCallback(
 			"until the rocket ship reaches the power cell." +
 		'</h3>',
 		'<h3>' +
-			"Try using the &ldquo;turn left&rdquo; if there is a path to the left." +
+			"Try using the &ldquo;turn left&rdquo; block if there is a path to the left." +
 		'</h3>',
 		'<h3>' +
 			"Program the rocket ship to reach the power cell. Connect the blocks to move the ship. " +
@@ -5854,13 +5854,13 @@ window.LoadLevel120 = ChallengeLoadLevelCallback(
 			"Try using the &ldquo;repeat until&rdquo; block until the rocket ship reaches the power cell." +
 		'</h3>',
 		'<h3>' +
-			"Try using the &ldquo;forward&rdquo; if there is a path in front." +
+			"Try using the &ldquo;forward&rdquo; block if there is a path in front." +
 		'</h3>',
 		'<h3>' +
-			"Try using the &ldquo;turn left&rdquo; if there is a path to the left." +
+			"Try using the &ldquo;turn left&rdquo; block if there is a path to the left." +
 		'</h3>',
 		'<h3>' +
-			"Try using the &ldquo;turn right&rdquo; if there is a path to the right." +
+			"Try using the &ldquo;turn right&rdquo; block if there is a path to the right." +
 		'</h3>',
 		'<h3>' +
 			"Program the rocket ship to reach the power cell. Connect the blocks to move the ship. " +
