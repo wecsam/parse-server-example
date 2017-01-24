@@ -5226,7 +5226,7 @@ function ChallengeLoadLevelCallback(
 	toolboxXML, // a string - passed directly to Blockly to form the toolbox
 	additionalVisibleObstacles // an array - passed directly to ChallengePathToObstacles
 ){
-	var MAX_NUM_HINTS = 5;
+	var MAX_NUM_HINTS = 6;
 	if(typeof ChallengePaths[thisLevel] != "object"){
 		console.error("ChallengeLoadLevelCallback error: the path for level " + thisLevel + "is not defined.");
 	}
