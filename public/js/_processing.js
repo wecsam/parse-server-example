@@ -548,11 +548,17 @@ function UnlockLevels(maxLevel) {
     }
 }
 
-function ReloadLevel() {
+function ReloadLevel(showInstructionsAndClearWorkspace) {
     while (animationsArray.length > 0) {
         clearTimeout(animationsArray.pop());
     }
-    LoadLevel(currentLevel);
+	if(showInstructionsAndClearWorkspace){
+		var level = currentLevel;
+		currentLevel = 0;
+		LoadLevel(level);
+	}else{
+		LoadLevel(currentLevel);
+	}
 }
 
 function LoadLevel(level) {
@@ -6270,7 +6276,7 @@ function CheckInvalidStates() {
 }
 
 function Retry() {
-    ReloadLevel();
+    ReloadLevel(false);
     animationsArray = [];
     redraw();
 }

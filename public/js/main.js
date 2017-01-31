@@ -148,14 +148,7 @@ $( document ).ready(function() {
 	});*/
 
 	$(".modal .retry").click(function(){
-		ReloadLevel();
-		if(!$.isEmptyObject(CURRENT_USER)){
-			var Retry = Parse.Object.extend("Retry");
-			var retry = new Retry();
-			retry.set("time", new Date());
-			retry.set("UserId", CURRENT_USER.id);
-			retry.save();
-		}
+		ReloadLevel(true);
 	});
 
 	$('.tipModal').on('hidden.bs.modal', function () {
@@ -200,14 +193,6 @@ $( document ).ready(function() {
 	});
 
 	$("#menuButtons .retry").click(function(){
-		//Kill all animations in queue
-		while(animationsArray.length > 0){
-			clearTimeout(animationsArray.pop());
-		}
-
-		var level = currentLevel; //Store current level
-		currentLevel = 0; //Change currentLevel value so that Loading the level will make it seem like its the first time. This forces instructions to be displayed
-		LoadLevel(level); //Load the level
 		if(!$.isEmptyObject(CURRENT_USER)){
 			var Retry = Parse.Object.extend("Retry");
 			var retry = new Retry();
@@ -222,6 +207,7 @@ $( document ).ready(function() {
 			retry.set("UserId", CURRENT_USER.id);
 			retry.save();
 		}
+		ReloadLevel(true);
 	});
 
 	$(".tip").click(function(){
@@ -264,6 +250,14 @@ $( document ).ready(function() {
 
 	var challengesEnabled = false;
 	$("#levelSelect").click(function(){
+		if(!$.isEmptyObject(CURRENT_USER)){
+			var OpenLevelSelectMenu = Parse.Object.extend("OpenLevelSelectMenu");
+			var event = new OpenLevelSelectMenu();
+			event.set("time", new Date());
+			event.set("UserId", CURRENT_USER.id);
+			event.save();
+		}
+		
 		hideControlsMenu();
 
 		$("#worldSelectMenu").hide();
