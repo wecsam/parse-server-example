@@ -383,8 +383,9 @@ $( document ).ready(function() {
 	});
 
 	$(".levelSelectMenu button").click(function(){
+		// Get the level number of this button.
 		var level = parseInt( this.id.match(/\d+/)[0] );
-		LoadLevel(level);
+		// Record that a level was chosen from the level selection menu.
 		if(!$.isEmptyObject(CURRENT_USER)) {
 			var LevelSelectedFromMenu = Parse.Object.extend("LevelSelectedFromMenu");
 			var levelSelectedFromMenu = new LevelSelectedFromMenu();
@@ -393,6 +394,10 @@ $( document ).ready(function() {
 			levelSelectedFromMenu.set("UserId", CURRENT_USER.id);
 			levelSelectedFromMenu.save();
 		}
+		// Force workspace to clear and instructions to show.
+		currentLevel = 0;
+		// Load the level.
+		LoadLevel(level);
 	});
 
 	$(".login-form button.login-form-submit").click(function(){
