@@ -578,7 +578,9 @@ function LoadLevel(level) {
 			level = 1;
 		}
 		// Save the level start event.
-		saveParseObjectExtension(isDummyLevel(level) ? "StartLevelDummy" : "StartLevel", {});
+		saveParseObjectExtension(isDummyLevel(level) ? "StartLevelDummy" : "StartLevel", {
+			"Level": level
+		});
 		// Load the level.
 		window["LoadLevel" + level]();
 		// Update the level number display.
