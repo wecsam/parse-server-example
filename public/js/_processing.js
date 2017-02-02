@@ -115,12 +115,12 @@ function draw() {
 }
 
 function runConditionIsPlus(){
-	if(CURRENT_USER.attributes.runCondition){
+	if(Parse.User.current().attributes.runCondition){
 		// List of run conditions:
 		// 0 - undefined, should not be used
 		// 1 - normal
 		// 2 - plus, which adds the "Oops"/"Missed It" messages and the feedback modal
-		return CURRENT_USER.attributes.runCondition == 2;
+		return Parse.User.current().attributes.runCondition == 2;
 	}
 	console.error("User's run condition is not set!");
 	//$("#instructionsModal .modal-body").html('<h3>Your run condition has not been set by the laboratory.</h3>');
@@ -578,13 +578,13 @@ function LoadLevel(level) {
 			level = 1;
 		}
 		// Save the level start event.
-		if(!$.isEmptyObject(CURRENT_USER)){
+		if(Parse.User.current()){
 			// Use a different class name for dummy levels.
 			var StartLevel = Parse.Object.extend(isDummyLevel(level) ? "StartLevelDummy" : "StartLevel");
 			var event = new StartLevel();
 			event.set("level", level);
 			event.set("time", new Date());
-			event.set("UserId", CURRENT_USER.id);
+			event.set("UserId", Parse.User.current().id);
 			event.save();
 		}
 		// Load the level.
@@ -6036,10 +6036,10 @@ function updateUserStars(numStars){
 	// Obtain the Parse subclass.
 	var UserStars = Parse.Object.extend("UserStars");
 	// Check whether the user already has a row in the UserStars table.
-	if(CURRENT_USER.attributes.starsID){
+	if(Parse.User.current().attributes.starsID){
 		// First, see how many stars the user previously had for this level.
 		var query = new Parse.Query(UserStars);
-		query.get(CURRENT_USER.attributes.starsID, {
+		query.get(Parse.User.current().attributes.starsID, {
 			success: function(userStars) {
 				// Update the new number of stars if the user got more stars than before.
 				if(!userStars.get(columnName) || (numStars > userStars.get(columnName))){
@@ -6055,11 +6055,11 @@ function updateUserStars(numStars){
 		// The user does not have a row in the UserStars table. Create one now.
 		var userStars = new UserStars();
 		userStars.set(columnName, numStars);
-		userStars.set("user", CURRENT_USER.id);
+		userStars.set("user", Parse.User.current().id);
 		userStars.save(null, {
 			success: function(userStars) {
-				CURRENT_USER.set("starsID", userStars.id);
-				CURRENT_USER.save();
+				Parse.User.current().set("starsID", userStars.id);
+				Parse.User.current().save();
 			},
 			error: function(userStars, error) {
 				console.error('Failed to create new stars table row: ' + error.message);
@@ -6161,16 +6161,14 @@ function CheckSuccess() {
 				$("#successModal").modal("show");
 			}
 
-            if (!$.isEmptyObject(CURRENT_USER)) {
-                CURRENT_USER.set("maxLevel", Math.max(currentLevel + 1, CURRENT_USER.attributes.maxLevel));
-                CURRENT_USER.save();
-                UnlockLevels(CURRENT_USER.attributes.maxLevel);
-
+            if(Parse.User.current()){
+				var maxLevelNew = Math.max(currentLevel + 1, Parse.User.current().attributes.maxLevel),
+					currentUser = Parse.User.current();
+                currentUser.set("maxLevel", maxLevelNew);
+                currentUser.save();
+                UnlockLevels(maxLevelNew);
                 var LevelCompleted = Parse.Object.extend("LevelCompleted");
                 var levelCompleted = new LevelCompleted();
-
-                console.log("Blocks used to solve problem: " + totalBlocksUsed);
-
                 levelCompleted.set("level", currentLevel);
                 levelCompleted.set("blocksUsed", totalBlocksUsed);
                 levelCompleted.set("codeUsed", Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
@@ -6178,7 +6176,7 @@ function CheckSuccess() {
 				if(numStars >= 0){
 					levelCompleted.set("stars", numStars);
 				}
-                levelCompleted.set("UserId", CURRENT_USER.id);
+                levelCompleted.set("UserId", currentUser.id);
                 levelCompleted.save();
             }
         } else {
@@ -6186,13 +6184,13 @@ function CheckSuccess() {
 			var continueAfterOopsMsg = function(){
 				$modal = $('.tipModal');
 				if (!$('.tipModal').hasClass('in')) {
-					if (!$.isEmptyObject(CURRENT_USER)) {
+					if(Parse.User.current()){
 						var HintProvided = Parse.Object.extend("HintProvided");
 						var hintProvided = new HintProvided();
 						hintProvided.set("HintId", (tipToShow > totalNumTips) ? 1 : tipToShow);
 						hintProvided.set("Level", currentLevel);
 						hintProvided.set("time", new Date());
-						hintProvided.set("UserId", CURRENT_USER.id);
+						hintProvided.set("UserId", Parse.User.current().id);
 						hintProvided.save();
 					};
 					displayTip(true);
@@ -6205,13 +6203,13 @@ function CheckSuccess() {
 					var oopsMsgElements = $(".oopsMsg");
 					oopsMsgID = (oopsMsgID < oopsMsgElements.length) ? oopsMsgID : 0;
 					// Log OopsMsg event in Parse.
-					if (!$.isEmptyObject(CURRENT_USER)) {
+					if(Parse.User.current()){
 						var OopsMsg = Parse.Object.extend("OopsMsg");
 						var oopsMsg = new OopsMsg();
 						oopsMsg.set("OopsMsgId", oopsMsgID);
 						oopsMsg.set("Level", currentLevel);
 						oopsMsg.set("time", new Date());
-						oopsMsg.set("UserId", CURRENT_USER.id);
+						oopsMsg.set("UserId", Parse.User.current().id);
 						oopsMsg.save();
 					}
 					// Display the oops message.

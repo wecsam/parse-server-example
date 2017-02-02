@@ -1,4 +1,3 @@
-var CURRENT_USER = {};
 var menuButtonsOpen = false;
 
 $( document ).ready(function() {
@@ -83,7 +82,7 @@ $( document ).ready(function() {
 		iframeSizeFull = true;
 		iframeResizeUser();
 
-		if(!$.isEmptyObject(CURRENT_USER)){
+		if(Parse.User.current()){
 			var Play = Parse.Object.extend("Play");
 			var playParse = new Play();
 
@@ -94,7 +93,7 @@ $( document ).ready(function() {
 			playParse.set("blocksUsed", totalBlocksUsed);
 			playParse.set("codeUsed", Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
 			playParse.set("time", new Date());
-			playParse.set("UserId", CURRENT_USER.id);
+			playParse.set("UserId", Parse.User.current().id);
 			playParse.save();
 		}
 		
@@ -140,7 +139,7 @@ $( document ).ready(function() {
 		stopParse.set("level", currentLevel);
 		stopParse.set("codeUsed", Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
 		stopParse.set("time", new Date());
-		stopParse.set("UserId", CURRENT_USER.id);
+		stopParse.set("UserId", Parse.User.current().id);
 		stopParse.save();
 	});
 	/*$(window).blur(function(){
@@ -156,13 +155,13 @@ $( document ).ready(function() {
 			player.reset();
 		}
 		$(this).data("resetWhenClosed", false);
-		if(!$.isEmptyObject(CURRENT_USER)){
+		if(Parse.User.current()){
 			var HintModalClosed = Parse.Object.extend("HintClosed");
 			var closeHint = new HintModalClosed();
 			closeHint.set("HintId", tipToShow - 1);
 			closeHint.set("Level", currentLevel);
 			closeHint.set("time", new Date());
-			closeHint.set("UserId", CURRENT_USER.id);
+			closeHint.set("UserId", Parse.User.current().id);
 			closeHint.save();
 		}
 	});
@@ -170,13 +169,13 @@ $( document ).ready(function() {
 	$('#newBlockModal').on('hidden.bs.modal', function () {
 		// There should be no need to move the player back to its original position here.
 		// Just log the event.
-		if(!$.isEmptyObject(CURRENT_USER)){
+		if(Parse.User.current()){
 			var HintModalClosed = Parse.Object.extend("HintClosed");
 			var closeHint = new HintModalClosed();
 			closeHint.set("HintId", -1);
 			closeHint.set("Level", currentLevel);
 			closeHint.set("time", new Date());
-			closeHint.set("UserId", CURRENT_USER.id);
+			closeHint.set("UserId", Parse.User.current().id);
 			closeHint.save();
 		}
 	});
@@ -193,7 +192,7 @@ $( document ).ready(function() {
 	});
 
 	$("#menuButtons .retry").click(function(){
-		if(!$.isEmptyObject(CURRENT_USER)){
+		if(Parse.User.current()){
 			var Retry = Parse.Object.extend("Retry");
 			var retry = new Retry();
 
@@ -204,7 +203,7 @@ $( document ).ready(function() {
 			retry.set("blocksUsed", totalBlocksUsed);
 			retry.set("codeUsed", Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
 			retry.set("time", new Date());
-			retry.set("UserId", CURRENT_USER.id);
+			retry.set("UserId", Parse.User.current().id);
 			retry.save();
 		}
 		ReloadLevel(true);
@@ -213,13 +212,13 @@ $( document ).ready(function() {
 	$(".tip").click(function(){
 		//Data is saved first, before tipToShow is modified
 		console.log("Hint modal requested from menu", tipToShow);
-		if(!$.isEmptyObject(CURRENT_USER)){
+		if(Parse.User.current()){
 			var HintRequested = Parse.Object.extend("HintRequested");
 			var hintModalRequested = new HintRequested();
 			hintModalRequested.set("HintId", (tipToShow > totalNumTips) ? 1 : tipToShow);
 			hintModalRequested.set("Level", currentLevel);
 			hintModalRequested.set("time", new Date());
-			hintModalRequested.set("UserId", CURRENT_USER.id);
+			hintModalRequested.set("UserId", Parse.User.current().id);
 			hintModalRequested.save();
 		};
 
@@ -231,13 +230,13 @@ $( document ).ready(function() {
 	$("#newBlockTip").click(function(){
 		console.log("New block modal requested from menu", tipToShow);
 
-		if(!$.isEmptyObject(CURRENT_USER)){
+		if(Parse.User.current()){
 			var HintRequested = Parse.Object.extend("HintRequested");
 			var hintModalRequested = new HintRequested();
 			hintModalRequested.set("HintId", -1);
 			hintModalRequested.set("Level", currentLevel);
 			hintModalRequested.set("time", new Date());
-			hintModalRequested.set("UserId", CURRENT_USER.id);
+			hintModalRequested.set("UserId", Parse.User.current().id);
 			hintModalRequested.save();
 		};
 
@@ -250,11 +249,11 @@ $( document ).ready(function() {
 
 	var challengesEnabled = false;
 	$("#levelSelect").click(function(){
-		if(!$.isEmptyObject(CURRENT_USER)){
+		if(Parse.User.current()){
 			var OpenLevelSelectMenu = Parse.Object.extend("OpenLevelSelectMenu");
 			var event = new OpenLevelSelectMenu();
 			event.set("time", new Date());
-			event.set("UserId", CURRENT_USER.id);
+			event.set("UserId", Parse.User.current().id);
 			event.save();
 		}
 		
@@ -283,9 +282,9 @@ $( document ).ready(function() {
 		
 		if(runConditionIsPlus()){
 			// Put the number of stars that the user has earned under each level button.
-			if(CURRENT_USER.attributes.starsID){
+			if(Parse.User.current().attributes.starsID){
 				var query = new Parse.Query(Parse.Object.extend("UserStars"));
-				query.get(CURRENT_USER.attributes.starsID, {
+				query.get(Parse.User.current().attributes.starsID, {
 					success: function(userStars) {
 						$("#levelSelectModal .modal-dialog button").each(function(){
 							if(this.id.indexOf("level") == 0){
@@ -339,11 +338,11 @@ $( document ).ready(function() {
 				if(password === "ptp"){
 					challengesEnabled = true;
 					// When entering the challenge world, log an event.
-					if(!$.isEmptyObject(CURRENT_USER)){
+					if(Parse.User.current()){
 						var logEventClass = Parse.Object.extend("ChallengeWorldEnter"),
 							logEvent = new logEventClass();
 						logEvent.set("time", new Date());
-						logEvent.set("UserId", CURRENT_USER.id);
+						logEvent.set("UserId", Parse.User.current().id);
 						logEvent.save();
 					}
 				}else if(password === null){
@@ -360,11 +359,11 @@ $( document ).ready(function() {
 				if(password === "ptpexit"){
 					challengesEnabled = false;
 					// When leaving the challenge world, log an event.
-					if(!$.isEmptyObject(CURRENT_USER)){
+					if(Parse.User.current()){
 						var logEventClass = Parse.Object.extend("ChallengeWorldExit"),
 							logEvent = new logEventClass();
 						logEvent.set("time", new Date());
-						logEvent.set("UserId", CURRENT_USER.id);
+						logEvent.set("UserId", Parse.User.current().id);
 						logEvent.save();
 					}
 				}else if(password === null){
@@ -387,12 +386,12 @@ $( document ).ready(function() {
 		// Get the level number of this button.
 		var level = parseInt( this.id.match(/\d+/)[0] );
 		// Record that a level was chosen from the level selection menu.
-		if(!$.isEmptyObject(CURRENT_USER)) {
+		if(Parse.User.current()) {
 			var LevelSelectedFromMenu = Parse.Object.extend("LevelSelectedFromMenu");
 			var levelSelectedFromMenu = new LevelSelectedFromMenu();
 			levelSelectedFromMenu.set("level", level);
 			levelSelectedFromMenu.set("time", new Date());
-			levelSelectedFromMenu.set("UserId", CURRENT_USER.id);
+			levelSelectedFromMenu.set("UserId", Parse.User.current().id);
 			levelSelectedFromMenu.save();
 		}
 		// Force workspace to clear and instructions to show.
@@ -411,16 +410,13 @@ $( document ).ready(function() {
 			function(user) {
 				//Hide navbar to use all available space
 				$("nav").hide();
-				CURRENT_USER = user;
 				$("#login").hide();
-				$("#logout h2").text(Parse.User.current().get("username"));
-				$("span#currentUser").html( Parse.User.current().get("studentName") );
+				$("#currentUser").text(user.get("username"));
 				$("#logout").show();
-
-				UnlockLevels(CURRENT_USER.attributes.maxLevel);
-				console.log("User's max level: " + CURRENT_USER.attributes.maxLevel);
+				console.log("User's max level: " + user.attributes.maxLevel);
 				$('#loginModal').modal('hide');
-				LoadLevel(Math.min(CURRENT_USER.attributes.maxLevel, parseInt($("#levelSelectMenu2 button:last").attr("id").match(/\d+/))));
+				UnlockLevels(user.attributes.maxLevel);
+				LoadLevel(Math.min(user.attributes.maxLevel, parseInt($("#levelSelectMenu2 button:last").attr("id").match(/\d+/))));
 			},
 			function(error) {
 				alert("Invalid username or password");
@@ -438,7 +434,6 @@ $( document ).ready(function() {
 
 	//Logout when the app is first loaded
 	Parse.User.logOut();
-	CURRENT_USER = {};
 	$("#logout").hide();
 
 	//Load Fast Click for mobile browsers
@@ -572,9 +567,13 @@ function init(){
 		Blockly.mainWorkspace.clear();
 		$("#loginModal").modal({
 			backdrop: 'static',
+			focus: false,
 			keyboard: false,
 			show: true
 		});
+		setTimeout(function(){
+			$("#loginModal input:first").focus();
+		}, 600);
 		var dynamicStyle = $('<style type="text/css"></style>');
 		$("head").append(dynamicStyle);
 		$(window).data("dynamicStyle", dynamicStyle).resize();
