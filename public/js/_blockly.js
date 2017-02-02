@@ -6,7 +6,7 @@ function blocklyLoaded(blockly) {
 }
 var output;
 function executeBlockly(){
-  var myCode = Blockly.JavaScript.workspaceToCode();
+  var myCode = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
   if (myCode !== '') {
     output = myCode.split('\n');
 
@@ -268,7 +268,7 @@ function parseCode() {
   Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
   Blockly.JavaScript.addReservedWords('highlightBlock');
 
-  var code = Blockly.JavaScript.workspaceToCode();
+  var code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
   code += "CheckSuccess();";
   myInterpreter = new Interpreter(code, initApi);
 

@@ -92,7 +92,7 @@ $( document ).ready(function() {
 			console.log("Blocks used on Start: " + totalBlocksUsed);
 			playParse.set("level", currentLevel);
 			playParse.set("blocksUsed", totalBlocksUsed);
-			playParse.set("codeUsed", Blockly.JavaScript.workspaceToCode());
+			playParse.set("codeUsed", Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
 			playParse.set("time", new Date());
 			playParse.set("UserId", CURRENT_USER.id);
 			playParse.save();
@@ -138,7 +138,7 @@ $( document ).ready(function() {
 		Blockly.mainWorkspace.highlightBlock(null);
 		var stopParse = new Parse.Object("Stop");
 		stopParse.set("level", currentLevel);
-		stopParse.set("codeUsed", Blockly.JavaScript.workspaceToCode());
+		stopParse.set("codeUsed", Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
 		stopParse.set("time", new Date());
 		stopParse.set("UserId", CURRENT_USER.id);
 		stopParse.save();
@@ -202,7 +202,7 @@ $( document ).ready(function() {
 			console.log("Blocks used on Retry: " + totalBlocksUsed);
 			retry.set("level", currentLevel);
 			retry.set("blocksUsed", totalBlocksUsed);
-			retry.set("codeUsed", Blockly.JavaScript.workspaceToCode());
+			retry.set("codeUsed", Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
 			retry.set("time", new Date());
 			retry.set("UserId", CURRENT_USER.id);
 			retry.save();
