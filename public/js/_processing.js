@@ -633,7 +633,7 @@ function LoadLevel1() {
 
     obstacles = [];
 
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block ' +
         // 'movable="false" ' +
@@ -713,7 +713,7 @@ function LoadLevel2() {
 
     obstacles = [];
 
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block type="walk"></block>' +
         '</xml>'
@@ -778,7 +778,7 @@ function LoadLevel3() {
     target.color = color(153, 51, 0);
 
     obstacles = [];
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block type="walk"></block>' +
         '</xml>'
@@ -844,7 +844,7 @@ function LoadLevel4() {
     target.color = color(153, 51, 0);
 
     obstacles = [new Obstacle(player.x + player.diameter * 3, player.y)];
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block type="walk"></block>' +
         //'<block type="repeat_until"></block>'+
@@ -925,7 +925,7 @@ function LoadLevel5() {
 
     obstacles = [];
 
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block type="controls_repeat">' +
         '<field name="TIMES">9</field>' +
@@ -980,7 +980,7 @@ function LoadLevel6() {
         totalNumTips = 3;
         numSteps = 9;
 
-        Blockly.updateToolbox(
+        Blockly.mainWorkspace.updateToolbox(
             '<xml id="toolbox" style="display: none">' +
             //'<block type="repeat_until"></block>'+
             '<block type="controls_repeat">' +
@@ -1064,7 +1064,7 @@ function LoadLevel7() {
         totalNumTips = 3;
         numSteps = 9;
 
-        Blockly.updateToolbox(
+        Blockly.mainWorkspace.updateToolbox(
             '<xml id="toolbox" style="display: none">' +
             '<block type="controls_repeat">' +
             '<field name="TIMES">3</field>' +
@@ -1147,7 +1147,7 @@ function LoadLevel8() {
         totalNumTips = 3;
         numSteps = 7;
 
-        Blockly.updateToolbox(
+        Blockly.mainWorkspace.updateToolbox(
             '<xml id="toolbox" style="display: none">' +
             //'<block type="repeat_until"></block>'+
             '<block type="controls_repeat">' +
@@ -1230,7 +1230,7 @@ function LoadLevel9() {
         totalNumTips = 3;
         numSteps = 7;
 
-        Blockly.updateToolbox(
+        Blockly.mainWorkspace.updateToolbox(
             '<xml id="toolbox" style="display: none">' +
             //'<block type="repeat_until"></block>'+
             '<block type="controls_repeat">' +
@@ -1313,7 +1313,7 @@ function LoadLevel10() {
         totalNumTips = 4;
         numSteps = 9;
 
-        Blockly.updateToolbox(
+        Blockly.mainWorkspace.updateToolbox(
             '<xml id="toolbox" style="display: none">' +
             //'<block type="repeat_until"></block>'+
             '<block type="controls_repeat">' +
@@ -1400,7 +1400,7 @@ function LoadLevel11() {
         controls_whileUntil_options = [
             ['repeat until', 'UNTIL']
         ];
-		Blockly.updateToolbox(
+		Blockly.mainWorkspace.updateToolbox(
 			'<xml id="toolbox" style="display: none">' +
 				'<block type="repeat_until">' +
 					'<value name="BOOL">' +
@@ -1489,7 +1489,7 @@ function LoadLevel12() {
         controls_whileUntil_options = [
             ['repeat until', 'UNTIL']
         ];
-        Blockly.updateToolbox(
+        Blockly.mainWorkspace.updateToolbox(
             '<xml id="toolbox" style="display: none">' +
 				'<block type="repeat_until">' +
 					'<value name="BOOL">' +
@@ -1574,7 +1574,7 @@ function LoadLevel13() {
         controls_whileUntil_options = [
             ['repeat until', 'UNTIL']
         ];
-		Blockly.updateToolbox(
+		Blockly.mainWorkspace.updateToolbox(
 			'<xml id="toolbox" style="display: none">' +
 				'<block type="repeat_until">' +
 					'<value name="BOOL">' +
@@ -1659,7 +1659,7 @@ function LoadLevel14() {
         controls_whileUntil_options = [
             ['repeat while', 'WHILE']
         ];
-		Blockly.updateToolbox(
+		Blockly.mainWorkspace.updateToolbox(
 			'<xml id="toolbox" style="display: none">' +
 				'<block type="repeat_while">' +
 					'<value name="BOOL">' +
@@ -1757,7 +1757,7 @@ function LoadLevel15() {
 		controls_whileUntil_options = [
 			['repeat while', 'WHILE']
 		];
-		Blockly.updateToolbox(
+		Blockly.mainWorkspace.updateToolbox(
 			'<xml id="toolbox" style="display: none">' +
 				'<block type="repeat_while">' +
 					'<value name="BOOL">' +
@@ -1848,7 +1848,7 @@ function LoadLevel16() {
 		controls_whileUntil_options = [
 			['repeat until', 'UNTIL']
 		];
-		Blockly.updateToolbox(
+		Blockly.mainWorkspace.updateToolbox(
 			'<xml id="toolbox" style="display: none">' +
 				'<block type="repeat_until">' +
 					'<value name="BOOL">' +
@@ -1940,7 +1940,7 @@ function LoadLevel17() {
         controls_whileUntil_options = [
             ['repeat until', 'UNTIL']
         ];
-		Blockly.updateToolbox(
+		Blockly.mainWorkspace.updateToolbox(
 			'<xml id="toolbox" style="display: none">' +
 				'<block type="repeat_until">' +
 					'<value name="BOOL">' +
@@ -2040,7 +2040,7 @@ function LoadLevel18() {
             ['repeat until', 'UNTIL']
         ];
 
-		Blockly.updateToolbox(
+		Blockly.mainWorkspace.updateToolbox(
 			'<xml id="toolbox" style="display: none">' +
 				'<block type="repeat_until">' +
 					'<value name="BOOL">' +
@@ -2156,7 +2156,7 @@ function LoadLevel19() {
             ['repeat until', 'UNTIL']
         ];
 
-		Blockly.updateToolbox(
+		Blockly.mainWorkspace.updateToolbox(
 			'<xml id="toolbox" style="display: none">' +
 				'<block type="repeat_until">' +
 					'<value name="BOOL">' +
@@ -2262,7 +2262,7 @@ function LoadLevel20() {
             ['repeat until', 'UNTIL']
         ];
 
-		Blockly.updateToolbox(
+		Blockly.mainWorkspace.updateToolbox(
 			'<xml id="toolbox" style="display: none">' +
 				'<block type="repeat_until">' +
 					'<value name="BOOL">' +
@@ -2378,7 +2378,7 @@ function LoadLevel21() {
 
     obstacles = [];
 
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block ' +
         'type="walk">' +
@@ -2447,7 +2447,7 @@ function LoadLevel22() {
 
     obstacles = [];
 
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block ' +
         'type="walk">' +
@@ -2517,7 +2517,7 @@ function LoadLevel23() {
         new Obstacle(player.x + player.diameter * 3, player.y)
     ];
 
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block ' +
         'type="walk">' +
@@ -2597,7 +2597,7 @@ function LoadLevel24() {
         //new Obstacle(player.x + player.diameter*3, player.y)
     ];
 
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block type="controls_repeat">' +
         '<field name="TIMES">9</field>' +
@@ -2672,7 +2672,7 @@ function LoadLevel25() {
         new Obstacle(player.x + player.diameter * 8, player.y)
     ];
 
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block type="controls_repeat">' +
         '<field name="TIMES">3</field>' +
@@ -2767,7 +2767,7 @@ function LoadLevel26() {
         new Obstacle(player.x + player.diameter * 7, player.y)
     ];
 
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block type="controls_repeat">' +
         '<field name="TIMES">3</field>' +
@@ -2860,7 +2860,7 @@ function LoadLevel27() {
         new Obstacle(player.x + player.diameter * 4, player.y)
     ];
 
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block type="controls_repeat">' +
         '<field name="TIMES">3</field>' +
@@ -2953,7 +2953,7 @@ function LoadLevel28() {
         new Obstacle(player.x + player.diameter * 1, player.y)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="controls_if">' +
 				'<value name="IF0">' +
@@ -3037,7 +3037,7 @@ function LoadLevel29() {
         new Obstacle(player.x + player.diameter * 1, player.y)
     ];
 
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
 
         '<block type="controls_if">' +
@@ -3143,7 +3143,7 @@ function LoadLevel30() {
         new Obstacle(player.x + player.diameter * 7, player.y)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="repeat_until">' +
 				'<value name="BOOL">' +
@@ -3247,7 +3247,7 @@ function LoadLevel31() {
         new Obstacle(player.x + player.diameter * 7, player.y)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="repeat_until">' +
 				'<value name="BOOL">' +
@@ -3362,7 +3362,7 @@ function LoadLevel32() {
         new Obstacle(player.x + player.diameter * 7, player.y)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="repeat_until">' +
 				'<value name="BOOL">' +
@@ -3478,7 +3478,7 @@ function LoadLevel33() {
         new Obstacle(player.x + player.diameter * 3, player.y)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="controls_if">' +
 				'<value name="IF0">' +
@@ -3578,7 +3578,7 @@ function LoadLevel34() {
         new Obstacle(player.x + player.diameter * 2, player.y - player.diameter)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="controls_if">' +
 				'<value name="IF0">' +
@@ -3680,7 +3680,7 @@ function LoadLevel35() {
         new Obstacle(player.x + player.diameter * 7, player.y)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
 			'<block type="repeat_until">' +
 				'<value name="BOOL">' +
@@ -3810,7 +3810,7 @@ function LoadLevel36() {
         new Obstacle(player.x + player.diameter * 7, player.y - player.diameter)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="repeat_until">' +
 				'<value name="BOOL">' +
@@ -3912,7 +3912,7 @@ function LoadLevel37() {
         new Obstacle(player.x + player.diameter * 5, player.y)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
 			'<block type="controls_if">' +
 				'<value name="IF0">' +
@@ -4051,7 +4051,7 @@ function LoadLevel38() {
         new Obstacle(player.x + player.diameter * 4, player.y - player.diameter)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="controls_if">' +
 				'<value name="IF0">' +
@@ -4192,7 +4192,7 @@ function LoadLevel39() {
         new Obstacle(player.x + player.diameter * 7, player.y)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="repeat_until">' +
 				'<value name="BOOL">' +
@@ -4347,7 +4347,7 @@ function LoadLevel40() {
         new Obstacle(player.x + player.diameter * 7, player.y - player.diameter)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="repeat_until">' +
 				'<value name="BOOL">' +
@@ -4507,7 +4507,7 @@ function LoadLevel41() {
         new Obstacle(player.x + player.diameter * 7, player.y - player.diameter)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="repeat_until">' +
 				'<value name="BOOL">' +
@@ -4669,7 +4669,7 @@ function LoadLevel42() {
         new Obstacle(player.x + player.diameter * 7, player.y)
     ];
 
-	Blockly.updateToolbox(
+	Blockly.mainWorkspace.updateToolbox(
 		'<xml id="toolbox" style="display: none">' +
 			'<block type="repeat_until">' +
 				'<value name="BOOL">' +
@@ -4945,7 +4945,7 @@ function LoadLevel99() {
         new ObstacleChallenge(player.x + player.diameter * 7, player.y + player.diameter * 4, false)
     ];
 
-    Blockly.updateToolbox(
+    Blockly.mainWorkspace.updateToolbox(
         '<xml id="toolbox" style="display: none">' +
         '<block type="controls_repeat">' +
         '<field name="TIMES">3</field>' +
@@ -5277,7 +5277,7 @@ function ChallengeLoadLevelCallback(
 		// Surround the path with obstacles.
 		obstacles = ChallengePathToObstacles(ChallengePaths[thisLevel], additionalVisibleObstacles);
 		// This level only has the forward block in the toolbox.
-		Blockly.updateToolbox(toolboxXML);
+		Blockly.mainWorkspace.updateToolbox(toolboxXML);
 		// Add up to five hints.
 		for(var i = 0; (i < hints.length) && (i < MAX_NUM_HINTS); i++){
 			$("#tipModal" + (i + 1) + " .modal-body").html(hints[i]);
