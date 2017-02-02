@@ -6173,7 +6173,7 @@ function CheckSuccess() {
 
                 levelCompleted.set("level", currentLevel);
                 levelCompleted.set("blocksUsed", totalBlocksUsed);
-                levelCompleted.set("codeUsed", Blockly.JavaScript.workspaceToCode());
+                levelCompleted.set("codeUsed", Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
                 levelCompleted.set("time", new Date());
 				if(numStars >= 0){
 					levelCompleted.set("stars", numStars);
