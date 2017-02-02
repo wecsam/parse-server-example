@@ -6167,32 +6167,23 @@ function CheckSuccess() {
                 currentUser.set("maxLevel", maxLevelNew);
                 currentUser.save();
                 UnlockLevels(maxLevelNew);
-                var LevelCompleted = Parse.Object.extend("LevelCompleted");
-                var levelCompleted = new LevelCompleted();
-                levelCompleted.set("level", currentLevel);
-                levelCompleted.set("blocksUsed", totalBlocksUsed);
-                levelCompleted.set("codeUsed", Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
-                levelCompleted.set("time", new Date());
+				var logData = {
+					"blocksUsed": totalBlocksUsed,
+					"codeUsed": Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace)
+				};
 				if(numStars >= 0){
-					levelCompleted.set("stars", numStars);
+					logData["Stars"] = numStars;
 				}
-                levelCompleted.set("UserId", currentUser.id);
-                levelCompleted.save();
+                saveParseObjectExtension("LevelCompleted", logData);
             }
         } else {
             console.log("The user is incorrect.");
 			var continueAfterOopsMsg = function(){
 				$modal = $('.tipModal');
 				if (!$('.tipModal').hasClass('in')) {
-					if(Parse.User.current()){
-						var HintProvided = Parse.Object.extend("HintProvided");
-						var hintProvided = new HintProvided();
-						hintProvided.set("HintId", (tipToShow > totalNumTips) ? 1 : tipToShow);
-						hintProvided.set("Level", currentLevel);
-						hintProvided.set("time", new Date());
-						hintProvided.set("UserId", Parse.User.current().id);
-						hintProvided.save();
-					};
+					saveParseObjectExtension("HintProvided", {
+						"HintId": (tipToShow > totalNumTips) ? 1 : tipToShow
+					});
 					displayTip(true);
 				}
 			}
@@ -6203,15 +6194,9 @@ function CheckSuccess() {
 					var oopsMsgElements = $(".oopsMsg");
 					oopsMsgID = (oopsMsgID < oopsMsgElements.length) ? oopsMsgID : 0;
 					// Log OopsMsg event in Parse.
-					if(Parse.User.current()){
-						var OopsMsg = Parse.Object.extend("OopsMsg");
-						var oopsMsg = new OopsMsg();
-						oopsMsg.set("OopsMsgId", oopsMsgID);
-						oopsMsg.set("Level", currentLevel);
-						oopsMsg.set("time", new Date());
-						oopsMsg.set("UserId", Parse.User.current().id);
-						oopsMsg.save();
-					}
+					saveParseObjectExtension("OopsMsg", {
+						"OopsMsgId": oopsMsgID
+					});
 					// Display the oops message.
 					oopsMsgElements.slice(oopsMsgID, oopsMsgID + 1).show();
 					// Remove the oops message and display the hint.

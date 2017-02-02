@@ -1,5 +1,42 @@
 var menuButtonsOpen = false;
-
+function saveParseObjectExtension(className, extraProperties){
+	// This function saves an object to the Parse server.
+	// Check that the Parse API is loaded.
+	if(window.Parse){
+		// Create a "static" map of class names to their classes.
+		if(!saveParseObjectExtension.classes){
+			saveParseObjectExtension.classes = {};
+		}
+		// Extend Parse.Object if it has not been done already.
+		if(!saveParseObjectExtension.classes.hasOwnProperty(className)){
+			// Check that the class name is not a reserved keyword.
+			if(saveParseObjectExtension.classes[className]){
+				console.error("Cannot save object of class", className, "because it is a reserved keyword.");
+				return false;
+			}
+			// Extend the class.
+			saveParseObjectExtension.classes[className] = Parse.Object.extend(className);
+		}
+		// Check that there is a current user or that anonymous saves are allowed.
+		var currentUser = Parse.User.current();
+		if(currentUser){
+			// Create an instance of the desired class.
+			var prop, event = new saveParseObjectExtension.classes[className]();
+			// These properties should always be saved with every object.
+			event.set("Time", new Date());
+			event.set("UserID", currentUser.id);
+			event.set("Level", window.currentLevel);
+			// Add the additional properties.
+			for(prop in extraProperties){
+				event.set(prop, extraProperties[prop]);
+			}
+			// Initiate the upload of this data.
+			event.save();
+			return true;
+		}
+	}
+	return false;
+}
 $( document ).ready(function() {
 	$menuButtons = $("ul#menuButtons");
 	$menuButtons.slideUp();
@@ -82,20 +119,10 @@ $( document ).ready(function() {
 		iframeSizeFull = true;
 		iframeResizeUser();
 
-		if(Parse.User.current()){
-			var Play = Parse.Object.extend("Play");
-			var playParse = new Play();
-
-			totalBlocksUsed = getTotalBlocksUsed();
-
-			console.log("Blocks used on Start: " + totalBlocksUsed);
-			playParse.set("level", currentLevel);
-			playParse.set("blocksUsed", totalBlocksUsed);
-			playParse.set("codeUsed", Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
-			playParse.set("time", new Date());
-			playParse.set("UserId", Parse.User.current().id);
-			playParse.save();
-		}
+		saveParseObjectExtension("Play", {
+			"blocksUsed": getTotalBlocksUsed(),
+			"codeUsed": Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace)
+		});
 		
 		function animationComplete(){
 			if(window.animationsArray.length != 0){
@@ -155,29 +182,17 @@ $( document ).ready(function() {
 			player.reset();
 		}
 		$(this).data("resetWhenClosed", false);
-		if(Parse.User.current()){
-			var HintModalClosed = Parse.Object.extend("HintClosed");
-			var closeHint = new HintModalClosed();
-			closeHint.set("HintId", tipToShow - 1);
-			closeHint.set("Level", currentLevel);
-			closeHint.set("time", new Date());
-			closeHint.set("UserId", Parse.User.current().id);
-			closeHint.save();
-		}
+		saveParseObjectExtension("HintClosed", {
+			"HintId": tipToShow - 1
+		});
 	});
 
 	$('#newBlockModal').on('hidden.bs.modal', function () {
 		// There should be no need to move the player back to its original position here.
 		// Just log the event.
-		if(Parse.User.current()){
-			var HintModalClosed = Parse.Object.extend("HintClosed");
-			var closeHint = new HintModalClosed();
-			closeHint.set("HintId", -1);
-			closeHint.set("Level", currentLevel);
-			closeHint.set("time", new Date());
-			closeHint.set("UserId", Parse.User.current().id);
-			closeHint.save();
-		}
+		saveParseObjectExtension("HintClosed", {
+			"HintId": -1
+		});
 	});
 
 	$('#successModal').on('hidden.bs.modal', function () {
@@ -192,35 +207,18 @@ $( document ).ready(function() {
 	});
 
 	$("#menuButtons .retry").click(function(){
-		if(Parse.User.current()){
-			var Retry = Parse.Object.extend("Retry");
-			var retry = new Retry();
-
-			var totalBlocksUsed = getTotalBlocksUsed();
-
-			console.log("Blocks used on Retry: " + totalBlocksUsed);
-			retry.set("level", currentLevel);
-			retry.set("blocksUsed", totalBlocksUsed);
-			retry.set("codeUsed", Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
-			retry.set("time", new Date());
-			retry.set("UserId", Parse.User.current().id);
-			retry.save();
-		}
+		saveParseObjectExtension("Retry", {
+			"blocksUsed": getTotalBlocksUsed(),
+			"codeUsed": Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace)
+		});
 		ReloadLevel(true);
 	});
 
 	$(".tip").click(function(){
 		//Data is saved first, before tipToShow is modified
-		console.log("Hint modal requested from menu", tipToShow);
-		if(Parse.User.current()){
-			var HintRequested = Parse.Object.extend("HintRequested");
-			var hintModalRequested = new HintRequested();
-			hintModalRequested.set("HintId", (tipToShow > totalNumTips) ? 1 : tipToShow);
-			hintModalRequested.set("Level", currentLevel);
-			hintModalRequested.set("time", new Date());
-			hintModalRequested.set("UserId", Parse.User.current().id);
-			hintModalRequested.save();
-		};
+		saveParseObjectExtension("HintRequested", {
+			"HintId": (tipToShow > totalNumTips) ? 1 : tipToShow
+		});
 
 		//Hide menu buttons and instructions text
 		hideControlsMenu();
@@ -230,15 +228,9 @@ $( document ).ready(function() {
 	$("#newBlockTip").click(function(){
 		console.log("New block modal requested from menu", tipToShow);
 
-		if(Parse.User.current()){
-			var HintRequested = Parse.Object.extend("HintRequested");
-			var hintModalRequested = new HintRequested();
-			hintModalRequested.set("HintId", -1);
-			hintModalRequested.set("Level", currentLevel);
-			hintModalRequested.set("time", new Date());
-			hintModalRequested.set("UserId", Parse.User.current().id);
-			hintModalRequested.save();
-		};
+		saveParseObjectExtension("HintRequested", {
+			"HintId": -1
+		});
 
 		$("#newBlockModal").modal('show');
 	});
@@ -249,13 +241,7 @@ $( document ).ready(function() {
 
 	var challengesEnabled = false;
 	$("#levelSelect").click(function(){
-		if(Parse.User.current()){
-			var OpenLevelSelectMenu = Parse.Object.extend("OpenLevelSelectMenu");
-			var event = new OpenLevelSelectMenu();
-			event.set("time", new Date());
-			event.set("UserId", Parse.User.current().id);
-			event.save();
-		}
+		saveParseObjectExtension("OpenLevelSelectMenu", {});
 		
 		hideControlsMenu();
 
@@ -338,13 +324,7 @@ $( document ).ready(function() {
 				if(password === "ptp"){
 					challengesEnabled = true;
 					// When entering the challenge world, log an event.
-					if(Parse.User.current()){
-						var logEventClass = Parse.Object.extend("ChallengeWorldEnter"),
-							logEvent = new logEventClass();
-						logEvent.set("time", new Date());
-						logEvent.set("UserId", Parse.User.current().id);
-						logEvent.save();
-					}
+					saveParseObjectExtension("ChallengeWorldEnter", {});
 				}else if(password === null){
 					return;
 				}else{
@@ -359,13 +339,7 @@ $( document ).ready(function() {
 				if(password === "ptpexit"){
 					challengesEnabled = false;
 					// When leaving the challenge world, log an event.
-					if(Parse.User.current()){
-						var logEventClass = Parse.Object.extend("ChallengeWorldExit"),
-							logEvent = new logEventClass();
-						logEvent.set("time", new Date());
-						logEvent.set("UserId", Parse.User.current().id);
-						logEvent.save();
-					}
+					saveParseObjectExtension("ChallengeWorldExit", {});
 				}else if(password === null){
 					return;
 				}else{
@@ -386,14 +360,9 @@ $( document ).ready(function() {
 		// Get the level number of this button.
 		var level = parseInt( this.id.match(/\d+/)[0] );
 		// Record that a level was chosen from the level selection menu.
-		if(Parse.User.current()) {
-			var LevelSelectedFromMenu = Parse.Object.extend("LevelSelectedFromMenu");
-			var levelSelectedFromMenu = new LevelSelectedFromMenu();
-			levelSelectedFromMenu.set("level", level);
-			levelSelectedFromMenu.set("time", new Date());
-			levelSelectedFromMenu.set("UserId", Parse.User.current().id);
-			levelSelectedFromMenu.save();
-		}
+		saveParseObjectExtension("LevelSelectedFromMenu", {
+			"Level": level
+		});
 		// Force workspace to clear and instructions to show.
 		currentLevel = 0;
 		// Load the level.
