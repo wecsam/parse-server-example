@@ -162,12 +162,9 @@ $( document ).ready(function() {
 		player.angle = 0;
 		redraw();
 		Blockly.mainWorkspace.highlightBlock(null);
-		var stopParse = new Parse.Object("Stop");
-		stopParse.set("level", currentLevel);
-		stopParse.set("codeUsed", Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
-		stopParse.set("time", new Date());
-		stopParse.set("UserId", Parse.User.current().id);
-		stopParse.save();
+		saveParseObjectExtension("Stop", {
+			"codeUsed": Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace)
+		});
 	});
 	/*$(window).blur(function(){
 		$stop.click();

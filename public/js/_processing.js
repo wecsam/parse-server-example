@@ -578,15 +578,7 @@ function LoadLevel(level) {
 			level = 1;
 		}
 		// Save the level start event.
-		if(Parse.User.current()){
-			// Use a different class name for dummy levels.
-			var StartLevel = Parse.Object.extend(isDummyLevel(level) ? "StartLevelDummy" : "StartLevel");
-			var event = new StartLevel();
-			event.set("level", level);
-			event.set("time", new Date());
-			event.set("UserId", Parse.User.current().id);
-			event.save();
-		}
+		saveParseObjectExtension(isDummyLevel(level) ? "StartLevelDummy" : "StartLevel", {});
 		// Load the level.
 		window["LoadLevel" + level]();
 		// Update the level number display.
