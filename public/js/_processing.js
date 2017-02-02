@@ -564,7 +564,7 @@ function ReloadLevel(showInstructionsAndClearWorkspace) {
 function isDummyLevel(levelNumber){
 	// If the level loader function contains "LoadLevel" inside the function body, then it is a dummy level.
 	// Level 43 is also a dummy level.
-	return !!window["LoadLevel" + levelNumber] && ((levelNumber == 43) || (window["LoadLevel" + levelNumber].toString().indexOf("LoadLevel", 20) >= 0));
+	return !!(window["LoadLevel" + levelNumber] && ((levelNumber == 43) || window["LoadLevel" + levelNumber].toString().match(/\{[^]*\bLoadLevel(\(\d+|\d+\()\)[^]*\}/)));
 }
 
 function LoadLevel(level) {
