@@ -561,24 +561,35 @@ function ReloadLevel(showInstructionsAndClearWorkspace) {
 	}
 }
 
+function isDummyLevel(levelNumber){
+	// If the level loader function contains "LoadLevel" inside the function body, then it is a dummy level.
+	// Level 43 is also a dummy level.
+	return !!window["LoadLevel" + levelNumber] && ((levelNumber == 43) || (window["LoadLevel" + levelNumber].toString().indexOf("LoadLevel", 20) >= 0));
+}
+
 function LoadLevel(level) {
 	if((currentLevel != level) || (level == 0)){
+		// Reset animations, states, and the workspace.
 		animationsArray = [];
 		invalidState = false;
 		Blockly.mainWorkspace.clear();
-        if (!$.isEmptyObject(CURRENT_USER)) {
-            var StartLevel = Parse.Object.extend("StartLevel");
-            var startLevel = new StartLevel();
-			startLevel.set("time", new Date());
-            startLevel.set("UserId", CURRENT_USER.id);
-            startLevel.set("level", level);
-            startLevel.save();
-        }
-		if(window["LoadLevel" + level]){
-			window["LoadLevel" + level].call(window);
-		}else{
-			LoadLevel1();
+		// Check whether the requested level is defined.
+		if(!window["LoadLevel" + level]){
+			level = 1;
 		}
+		// Save the level start event.
+		if(!$.isEmptyObject(CURRENT_USER)){
+			// Use a different class name for dummy levels.
+			var StartLevel = Parse.Object.extend(isDummyLevel(level) ? "StartLevelDummy" : "StartLevel");
+			var event = new StartLevel();
+			event.set("level", level);
+			event.set("time", new Date());
+			event.set("UserId", CURRENT_USER.id);
+			event.save();
+		}
+		// Load the level.
+		window["LoadLevel" + level]();
+		// Update the level number display.
 		if (currentLevel <= 20) {
 			$("div#currentLevel").html(currentLevel);
 		} else if (currentLevel <= 43) {
