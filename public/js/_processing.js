@@ -5138,7 +5138,7 @@ function DrawStepsLevel99(){
 
 function LoadLevel100(){
 	// Bump the game to Level 102 because there is no 100 or 101.
-	LoadLevel102();
+	LoadLevel(102);
 }
 
 // The following functions make it easy to create challenge levels.
@@ -5442,7 +5442,7 @@ window.LoadLevel103 = ChallengeLoadLevelCallback(
 window.DrawStepsLevel103 = ChallengeDrawStepsCallback(103);
 
 function LoadLevel104(){
-	LoadLevel106();
+	LoadLevel(106);
 }
 
 ChallengePaths[106] = (function(){
@@ -5609,7 +5609,7 @@ window.LoadLevel107 = ChallengeLoadLevelCallback(
 window.DrawStepsLevel107 = ChallengeDrawStepsCallback(107);
 
 function LoadLevel108(){
-	LoadLevel109();
+	LoadLevel(109);
 }
 
 ChallengePaths[109] = (function(){
@@ -5713,7 +5713,7 @@ window.LoadLevel109 = ChallengeLoadLevelCallback(
 window.DrawStepsLevel109 = ChallengeDrawStepsCallback(109);
 
 function LoadLevel110(){
-	LoadLevel111();
+	LoadLevel(111);
 }
 
 ChallengePaths[111] = (function(){
@@ -5835,7 +5835,7 @@ window.LoadLevel111 = ChallengeLoadLevelCallback(
 window.DrawStepsLevel111 = ChallengeDrawStepsCallback(111);
 
 function LoadLevel112(){
-	LoadLevel120();
+	LoadLevel(120);
 }
 
 ChallengePaths[120] = (function(){
@@ -6001,7 +6001,7 @@ window.DrawStepsLevel120 = ChallengeDrawStepsCallback(120);
 
 function LoadLevel121(){
 	// Show the level selection menu.
-	LoadLevel43();
+	LoadLevel(43);
 }
 
 function insertCommasIntoNumber(theNumber, digitsPerGroup){
