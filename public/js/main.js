@@ -337,7 +337,6 @@ $( document ).ready(function() {
 				var password = prompt("Enter password to visit challenges:");
 				if(password === "ptp"){
 					challengesEnabled = true;
-					$(".level-select-footer-close").prop("disabled", true);
 					// When entering the challenge world, log an event.
 					if(!$.isEmptyObject(CURRENT_USER)){
 						var logEventClass = Parse.Object.extend("ChallengeWorldEnter"),
@@ -359,7 +358,6 @@ $( document ).ready(function() {
 				var password = prompt("Enter password to leave challenges:");
 				if(password === "ptpexit"){
 					challengesEnabled = false;
-					$(".level-select-footer-close").prop("disabled", true);
 					// When leaving the challenge world, log an event.
 					if(!$.isEmptyObject(CURRENT_USER)){
 						var logEventClass = Parse.Object.extend("ChallengeWorldExit"),
@@ -395,7 +393,6 @@ $( document ).ready(function() {
 			levelSelectedFromMenu.set("UserId", CURRENT_USER.id);
 			levelSelectedFromMenu.save();
 		}
-		$(".level-select-footer-close").prop("disabled", false);
 	});
 
 	$(".login-form button.login-form-submit").click(function(){
