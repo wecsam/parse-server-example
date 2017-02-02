@@ -401,9 +401,10 @@ $( document ).ready(function() {
 		LoadLevel(level);
 	});
 
-	$(".login-form button.login-form-submit").click(function(){
+	$(".login-form").submit(function(event){
+		event.preventDefault();
 		// Clear the log in form.
-		var $inputs = $(this).siblings("input").add(this);
+		var $inputs = $(this).find("input");
 		$inputs.prop("disabled", true);
 		// Pass the username and password to Parse for logging in.
 		Parse.User.logIn($("#login-username").val().toLowerCase(), $("#login-password").val()).then(
@@ -491,7 +492,6 @@ $( document ).ready(function() {
 				// Check whether this element is an input field with a numeric value.
 				if(isNaN(parseInt(target.textContent))){
 					// Close the calculator modal.
-					console.log("Blockly text input deactivated");
 					$("#blocklyNumbers").data("target", false).css({
 						"display": "none"
 					});
