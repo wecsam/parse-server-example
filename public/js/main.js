@@ -277,6 +277,7 @@ $( document ).ready(function() {
 
 		$("#levelSelectModal").modal({
 			backdrop: 'static',
+			keyboard: false,
 			show: true
 		});
 		
@@ -571,6 +572,7 @@ function init(){
 		Blockly.mainWorkspace.clear();
 		$("#loginModal").modal({
 			backdrop: 'static',
+			keyboard: false,
 			show: true
 		});
 		var dynamicStyle = $('<style type="text/css"></style>');
