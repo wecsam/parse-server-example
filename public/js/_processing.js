@@ -5304,25 +5304,21 @@ ChallengePaths[102] = (function(){
 })();
 window.LoadLevel102 = ChallengeLoadLevelCallback(
 	102,
-	"Collect a power cell on the way to the moon base.",
+	"Move the green triangle to the red circle.",
 	'<div class="row">' +
 		'<div class="col-xs-3 help-block-image">' +
 			'<img src="../images/forward.png">' +
 		'</div>' +
 		'<div class="col-xs-9 help-block-text">' +
-			'<h3>Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward to the next space on the path.</h3>' +
+			'<h3>Each &ldquo;forward&rdquo; block makes the green triangle go one step forward to the next space on the path.</h3>' +
 		'</div>' +
 	'</div>',
 	[
 		'<h3>' +
-			"Solve the puzzle using six blocks or fewer on your first try to earn three stars. " +
-			"If you don&rsquo;t get all three stars the first time, try again later." +
+			"Try connecting more than one &ldquo;forward&rdquo; block to reach the red circle." +
 		'</h3>',
 		'<h3>' +
-			"Try connecting more than one &ldquo;forward&rdquo; block to reach the power cell." +
-		'</h3>',
-		'<h3>' +
-			"You need to program the rocket ship to reach the power cell." +
+			"You need to program the green triangle to reach the red circle." +
 			"Connect the blocks to move the ship." +
 			"Try using many &ldquo;forward&rdquo; blocks." +
 		'</h3>' +
@@ -5342,7 +5338,7 @@ window.LoadLevel102 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-9 help-block-text">' +
 				'<h3>' +
-					"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+					"Each &ldquo;forward&rdquo; block makes the green triangle go one step forward." +
 				'</h3>' +
 			'</div>' +
 		'</div>'
@@ -5363,13 +5359,13 @@ ChallengePaths[103] = [
 ];
 window.LoadLevel103 = ChallengeLoadLevelCallback(
 	103,
-	"Get more power cells to get to the moon base quickly.",
+	"Move the green triangle to the red circle.",
 	'<div class="row">' +
 		'<div class="col-xs-3 help-block-image">' +
 			'<img src="../images/turn_left.png">' +
 		'</div>' +
 		'<div class="col-xs-9 help-block-text">' +
-			'<h3>Each &ldquo;turn left&rdquo; block makes the rocket ship turn to the left.</h3>' +
+			'<h3>Each &ldquo;turn left&rdquo; block makes the green triangle turn to the left.</h3>' +
 		'</div>' +
 	'</div>' +
 	'<div class="row">' +
@@ -5377,20 +5373,16 @@ window.LoadLevel103 = ChallengeLoadLevelCallback(
 			'<img src="../images/turn_right.png">' +
 		'</div>' +
 		'<div class="col-xs-9 help-block-text">' +
-			'<h3>Each &ldquo;turn right&rdquo; block makes the rocket ship turn to the right.</h3>' +
+			'<h3>Each &ldquo;turn right&rdquo; block makes the green triangle turn to the right.</h3>' +
 		'</div>' +
 	'</div>',
 	[
 		'<h3>' +
-			"Solve the puzzle using six blocks or fewer on your first try to earn three stars. " +
-			"If you don&rsquo;t get all three stars the first time, try again later." +
-		'</h3>',
-		'<h3>' +
 			"Try using the &ldquo;turn left&rdquo; and &ldquo;turn right&rdquo; blocks with " +
-			"the &ldquo;forward&rdquo; block to reach the power cell." +
+			"the &ldquo;forward&rdquo; block to reach the red circle." +
 		'</h3>',
 		'<h3>' +
-			"Program the rocket ship to reach the power cell. " +
+			"Program the green triangle to reach the red circle. " +
 			"Connect the blocks to move the ship. " +
 			"Try using the &ldquo;forward,&rdquo; &ldquo;turn right,&rdquo; and &ldquo;turn left&rdquo; blocks." +
 		'</h3>' +
@@ -5410,7 +5402,7 @@ window.LoadLevel103 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-9 help-block-text">' +
 				'<h3>' +
-					"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+					"Each &ldquo;forward&rdquo; block makes the green triangle go one step forward." +
 				'</h3>' +
 			'</div>' +
 		'</div>' +
@@ -5420,7 +5412,7 @@ window.LoadLevel103 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-9 help-block-text">' +
 				'<h3>' +
-					"Each &ldquo;turn left&rdquo; block makes the rocket ship turn to the left." +
+					"Each &ldquo;turn left&rdquo; block makes the green triangle turn to the left." +
 				'</h3>' +
 			'</div>' +
 		'</div>'
@@ -5451,22 +5443,18 @@ ChallengePaths[106] = (function(){
 function LoadLevel106(){
 	ChallengeLoadLevelCallback(
 		106,
-		"Find the power cell by making lots of turns in a repeat loop.",
+		"Find the red circle by making lots of turns in a repeat loop.",
 		null,
 		[
 			'<h3>' +
-				"Solve the puzzle using six blocks or fewer on your first try to earn three stars. " +
-				"If you don&rsquo;t get all three stars the first time, try again later." +
-			'</h3>',
-			'<h3>' +
 				"Try connecting the &ldquo;forward,&rdquo; &ldquo;turn right,&rdquo; and " +
-				"&ldquo;turn left&rdquo; blocks to the &ldquo;repeat&rdquo; block to make the rocket ship go forward." +
+				"&ldquo;turn left&rdquo; blocks to the &ldquo;repeat&rdquo; block to make the green triangle go forward." +
 			'</h3>',
 			'<h3>' +
-				"Try changing the value of the &ldquo;repeat&rdquo; block to make the rocket ship reach the power cell." +
+				"Try changing the value of the &ldquo;repeat&rdquo; block to make the green triangle reach the red circle." +
 			'</h3>',
 			'<h3>' +
-				"Program the rocket ship to reach the power cell. " +
+				"Program the green triangle to reach the red circle. " +
 				"Connect the blocks to move the ship. " +
 				"Try using many &ldquo;forward,&rdquo; &ldquo;turn right,&rdquo; and &ldquo;turn left&rdquo; blocks " +
 				"inside the &ldquo;repeat&rdquo; block." +
@@ -5490,7 +5478,7 @@ function LoadLevel106(){
 				'</div>' +
 				'<div class="col-xs-9 help-block-text">' +
 					'<h3>' +
-						"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+						"Each &ldquo;forward&rdquo; block makes the green triangle go one step forward." +
 					'</h3>' +
 				'</div>' +
 			'</div>' +
@@ -5499,7 +5487,7 @@ function LoadLevel106(){
 					'<img src="../images/turn_left.png">' +
 				'</div>' +
 				'<div class="col-xs-9 help-block-text">' +
-					'<h3>Each &ldquo;turn left&rdquo; block makes the rocket ship turn to the left.</h3>' +
+					'<h3>Each &ldquo;turn left&rdquo; block makes the green triangle turn to the left.</h3>' +
 				'</div>' +
 			'</div>' +
 			'<div class="row">' +
@@ -5508,7 +5496,7 @@ function LoadLevel106(){
 				'</div>' +
 				'<div class="col-xs-9 help-block-text">' +
 					'<h3>' +
-						"Each &ldquo;turn right&rdquo; block makes the rocket ship turn to the right." +
+						"Each &ldquo;turn right&rdquo; block makes the green triangle turn to the right." +
 					'</h3>' +
 				'</div>' +
 			'</div>'
@@ -5536,30 +5524,26 @@ ChallengePaths[107] = (function(){
 })();
 window.LoadLevel107 = ChallengeLoadLevelCallback(
 	107,
-	"Collect the power cell using the &ldquo;repeat until&rdquo; conditional loop.",
+	"Find the red circle using the &ldquo;repeat until&rdquo; conditional loop.",
 	'<div class="row">' +
 		'<div class="col-xs-4 help-block-image">' +
 			'<img src="../images/repeat_until_target.png">' +
 		'</div>' +
 		'<div class="col-xs-8 help-block-text">' +
 			'<h3>' +
-				"Repeat the blocks in this &ldquo;repeat until&rdquo; until the rocket ship reaches the power cell. " +
+				"Repeat the blocks in this &ldquo;repeat until&rdquo; until the green triangle reaches the red circle. " +
 				"The &ldquo;repeat until&rdquo; block is useful when you want to run the same code again and again " +
-				"until the goal is reached. In this case the goal is the power cell. " +
+				"until the goal is reached. In this case the goal is the red circle. " +
 				"You can connect the &ldquo;forward&rdquo; block inside it." +
 			'</h3>' +
 		'</div>' +
 	'</div>',
 	[
 		'<h3>' +
-			"Solve the puzzle using three blocks or fewer on your first try to earn three stars. " +
-			"If you don&rsquo;t get all three stars the first time, try again later." +
-		'</h3>',
-		'<h3>' +
 			"Try connecting the &ldquo;forward&rdquo; blocks to the &ldquo;repeat until&rdquo; block." +
 		'</h3>',
 		'<h3>' +
-			"Program the rocket ship to reach the power cell. " +
+			"Program the green triangle to reach the red circle. " +
 			"Try connecting &ldquo;forward&rdquo; blocks to the &ldquo;repeat until&rdquo; block." +
 		'</h3>' +
 		'<div class="row">' +
@@ -5568,9 +5552,9 @@ window.LoadLevel107 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-7 help-block-text">' +
 				'<h3>' +
-					"Repeat the blocks in this &ldquo;repeat until&rdquo; unil the rocket ship reaches the power cell. " +
+					"Repeat the blocks in this &ldquo;repeat until&rdquo; unil the green triangle reaches the red circle. " +
 					"The &ldquo;repeat until&rdquo; block is useful when you want to run the same code again and again " +
-					"until the goal is reached. In this case the goal is the power cell. " +
+					"until the goal is reached. In this case the goal is the red circle. " +
 					"You can connect the &ldquo;forward&rdquo; block inside it." +
 				'</h3>' +
 			'</div>' +
@@ -5581,7 +5565,7 @@ window.LoadLevel107 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-7 help-block-text">' +
 				'<h3>' +
-					"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+					"Each &ldquo;forward&rdquo; block makes the green triangle go one step forward." +
 				'</h3>' +
 			'</div>' +
 		'</div>'
@@ -5618,7 +5602,7 @@ ChallengePaths[109] = (function(){
 })();
 window.LoadLevel109 = ChallengeLoadLevelCallback(
 	109,
-	"Go to the power cell with conditions and turns.",
+	"Go to the red circle with conditions and turns.",
 	'<div class="row">' +
 		'<div class="col-xs-3 help-block-image">' +
 			'<img src="../images/if_path_left.png">' +
@@ -5631,17 +5615,13 @@ window.LoadLevel109 = ChallengeLoadLevelCallback(
 	'</div>',
 	[
 		'<h3>' +
-			"Solve the puzzle using five blocks or fewer on your first try to earn three stars. " +
-			"If you don&rsquo;t get all three stars the first time, try again later." +
-		'</h3>',
-		'<h3>' +
-			"Try using the &ldquo;repeat until&rdquo; block until the rocket ship reaches the power cell." +
+			"Try using the &ldquo;repeat until&rdquo; block until the green triangle reaches the red circle." +
 		'</h3>',
 		'<h3>' +
 			"Try using the &ldquo;turn left&rdquo; block if there is a path to the left." +
 		'</h3>',
 		'<h3>' +
-			"Program the rocket ship to reach the power cell. Connect the blocks to move the ship. " +
+			"Program the green triangle to reach the red circle. Connect the blocks to move the ship. " +
 			"Try using the &ldquo;repeat until&rdquo; &ldquo;left turn&rdquo; and &ldquo;forward&rdquo; blocks." +
 		'</h3>' +
 		'<div class="row">' +
@@ -5650,9 +5630,9 @@ window.LoadLevel109 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-7 help-block-text">' +
 				'<h3>' +
-					"Repeat the blocks in this &ldquo;repeat until&rdquo; unil the rocket ship reaches the power cell. " +
+					"Repeat the blocks in this &ldquo;repeat until&rdquo; unil the green triangle reaches the red circle. " +
 					"The &ldquo;repeat until&rdquo; block is useful when you want to run the same code again and again " +
-					"until the goal is reached. In this case the goal is the power cell. " +
+					"until the goal is reached. In this case the goal is the red circle. " +
 					"You can connect the &ldquo;forward,&rdquo; &ldquo;if,&rdquo; and &ldquo;turn left&rdquo; blocks inside it." +
 				'</h3>' +
 			'</div>' +
@@ -5673,7 +5653,7 @@ window.LoadLevel109 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-9 help-block-text">' +
 				'<h3>' +
-					"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+					"Each &ldquo;forward&rdquo; block makes the green triangle go one step forward." +
 				'</h3>' +
 			'</div>' +
 		'</div>' +
@@ -5682,7 +5662,7 @@ window.LoadLevel109 = ChallengeLoadLevelCallback(
 				'<img src="../images/turn_left.png">' +
 			'</div>' +
 			'<div class="col-xs-9 help-block-text">' +
-				'<h3>Each &ldquo;turn left&rdquo; block makes the rocket ship turn to the left.</h3>' +
+				'<h3>Each &ldquo;turn left&rdquo; block makes the green triangle turn to the left.</h3>' +
 			'</div>' +
 		'</div>'
 	],
@@ -5728,22 +5708,18 @@ ChallengePaths[111] = (function(){
 })();
 window.LoadLevel111 = ChallengeLoadLevelCallback(
 	111,
-	"Collect the power cell with more conditions and left turns.",
+	"Find the red circle with more conditions and left turns.",
 	null,
 	[
 		'<h3>' +
-			"Solve the puzzle using five blocks or fewer on your first try to earn three stars. " +
-			"If you don&rsquo;t get all three stars the first time, try again later." +
-		'</h3>',
-		'<h3>' +
 			"Try using the &ldquo;repeat until&rdquo; or &ldquo;repeat while&rdquo; block " +
-			"until the rocket ship reaches the power cell." +
+			"until the green triangle reaches the red circle." +
 		'</h3>',
 		'<h3>' +
 			"Try using the &ldquo;turn left&rdquo; block if there is a path to the left." +
 		'</h3>',
 		'<h3>' +
-			"Program the rocket ship to reach the power cell. Connect the blocks to move the ship. " +
+			"Program the green triangle to reach the red circle. Connect the blocks to move the ship. " +
 			"Try using the &ldquo;repeat until&rdquo; or &ldquo;repeat while&rdquo; with " +
 			"the &ldquo;left turn&rdquo; and &ldquo;forward&rdquo; blocks." +
 		'</h3>' +
@@ -5753,9 +5729,9 @@ window.LoadLevel111 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-7 help-block-text">' +
 				'<h3>' +
-					"Repeat the blocks in this &ldquo;repeat until&rdquo; unil the rocket ship reaches the power cell. " +
+					"Repeat the blocks in this &ldquo;repeat until&rdquo; unil the green triangle reaches the red circle. " +
 					"The &ldquo;repeat until&rdquo; block is useful when you want to run the same code again and again " +
-					"until the goal is reached. In this case the goal is the power cell. " +
+					"until the goal is reached. In this case the goal is the red circle. " +
 					"You can connect the &ldquo;forward,&rdquo; &ldquo;if,&rdquo; and &ldquo;turn left&rdquo; blocks inside it." +
 				'</h3>' +
 			'</div>' +
@@ -5766,7 +5742,7 @@ window.LoadLevel111 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-7 help-block-text">' +
 				'<h3>' +
-					"Repeat the blocks in this &ldquo;repeat with&rdquo; while there is a path in front of the rocket ship. " +
+					"Repeat the blocks in this &ldquo;repeat with&rdquo; while there is a path in front of the green triangle. " +
 					"The &ldquo;repeat while&rdquo; block is useful when you want to run the same code again and again " +
 					"while a condition is true.  You can connect the &ldquo;forward,&rdquo; &ldquo;if,&rdquo; " +
 					"and &ldquo;turn left&rdquo; blocks inside it." +
@@ -5789,7 +5765,7 @@ window.LoadLevel111 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-9 help-block-text">' +
 				'<h3>' +
-					"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+					"Each &ldquo;forward&rdquo; block makes the green triangle go one step forward." +
 				'</h3>' +
 			'</div>' +
 		'</div>' +
@@ -5798,7 +5774,7 @@ window.LoadLevel111 = ChallengeLoadLevelCallback(
 				'<img src="../images/turn_left.png">' +
 			'</div>' +
 			'<div class="col-xs-9 help-block-text">' +
-				'<h3>Each &ldquo;turn left&rdquo; block makes the rocket ship turn to the left.</h3>' +
+				'<h3>Each &ldquo;turn left&rdquo; block makes the green triangle turn to the left.</h3>' +
 			'</div>' +
 		'</div>'
 	],
@@ -5854,15 +5830,11 @@ ChallengePaths[120] = (function(){
 })();
 window.LoadLevel120 = ChallengeLoadLevelCallback(
 	120, 
-	"Collect the power cell with more conditions and left turns.",
+	"Find the red circle with more conditions and left turns.",
 	null,
 	[
 		'<h3>' +
-			"Solve the puzzle using eight blocks or fewer on your first try to earn three stars. " +
-			"If you don&rsquo;t get all three stars the first time, try again later." +
-		'</h3>',
-		'<h3>' +
-			"Try using the &ldquo;repeat until&rdquo; block until the rocket ship reaches the power cell." +
+			"Try using the &ldquo;repeat until&rdquo; block until the green triangle reaches the red circle." +
 		'</h3>',
 		'<h3>' +
 			"Try using the &ldquo;forward&rdquo; block if there is a path in front." +
@@ -5874,7 +5846,7 @@ window.LoadLevel120 = ChallengeLoadLevelCallback(
 			"Try using the &ldquo;turn right&rdquo; block if there is a path to the right." +
 		'</h3>',
 		'<h3>' +
-			"Program the rocket ship to reach the power cell. Connect the blocks to move the ship. " +
+			"Program the green triangle to reach the red circle. Connect the blocks to move the ship. " +
 			"Try using the &ldquo;repeat until&rdquo;, &ldquo;turn left,&rdquo; &ldquo;turn right,&rdquo; " +
 			"and &ldquo;forward&rdquo; blocks." +
 		'</h3>' +
@@ -5884,9 +5856,9 @@ window.LoadLevel120 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-7 help-block-text">' +
 				'<h3>' +
-					"Repeat the blocks in this &ldquo;repeat until&rdquo; unil the rocket ship reaches the power cell. " +
+					"Repeat the blocks in this &ldquo;repeat until&rdquo; unil the green triangle reaches the red circle. " +
 					"The &ldquo;repeat until&rdquo; block is useful when you want to run the same code again and again " +
-					"until the goal is reached. In this case the goal is the power cell. " +
+					"until the goal is reached. In this case the goal is the red circle. " +
 					"You can connect the &ldquo;forward,&rdquo; &ldquo;if,&rdquo; &ldquo;turn left,&rdquo; and " +
 					"&ldquo;turn right&rdquo; blocks inside it." +
 				'</h3>' +
@@ -5931,7 +5903,7 @@ window.LoadLevel120 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-9 help-block-text">' +
 				'<h3>' +
-					"Each &ldquo;forward&rdquo; block makes the rocket ship go one step forward." +
+					"Each &ldquo;forward&rdquo; block makes the green triangle go one step forward." +
 				'</h3>' +
 			'</div>' +
 		'</div>' +
@@ -5940,7 +5912,7 @@ window.LoadLevel120 = ChallengeLoadLevelCallback(
 				'<img src="../images/turn_left.png">' +
 			'</div>' +
 			'<div class="col-xs-9 help-block-text">' +
-				'<h3>Each &ldquo;turn left&rdquo; block makes the rocket ship turn to the left.</h3>' +
+				'<h3>Each &ldquo;turn left&rdquo; block makes the green triangle turn to the left.</h3>' +
 			'</div>' +
 		'</div>' +
 		'<div class="row">' +
@@ -5949,7 +5921,7 @@ window.LoadLevel120 = ChallengeLoadLevelCallback(
 			'</div>' +
 			'<div class="col-xs-9 help-block-text">' +
 				'<h3>' +
-					"Each &ldquo;turn right&rdquo; block makes the rocket ship turn to the right." +
+					"Each &ldquo;turn right&rdquo; block makes the green triangle turn to the right." +
 				'</h3>' +
 			'</div>' +
 		'</div>'
