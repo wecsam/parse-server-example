@@ -374,13 +374,15 @@ $( document ).ready(function() {
 		// Pass the username and password to Parse for logging in.
 		Parse.User.logIn($("#login-username").val().toLowerCase(), $("#login-password").val()).then(
 			function(user) {
-				//Hide navbar to use all available space
-				$("nav").hide();
-				$("#login").hide();
+				// The user was successfully authenticated.
+				// Record an event separate from the _Session collection.
+				saveParseObjectExtension("UserSessionBegin", {});
+				// Display the current username.
 				$("#currentUser").text(user.get("username"));
-				$("#logout").show();
 				console.log("User's max level: " + user.attributes.maxLevel);
+				// Dismiss the modal.
 				$('#loginModal').modal('hide');
+				// Load the user's highest level within the non-challenge problem sets.
 				UnlockLevels(user.attributes.maxLevel);
 				LoadLevel(Math.min(user.attributes.maxLevel, parseInt($("#levelSelectMenu2 button:last").attr("id").match(/\d+/))));
 			},
@@ -394,13 +396,10 @@ $( document ).ready(function() {
 
 	$("#logout button").click(function(){
 		Parse.User.logOut();
-		$("#login").show();
-		$("#logout").hide();
 	});
 
 	//Logout when the app is first loaded
 	Parse.User.logOut();
-	$("#logout").hide();
 
 	//Load Fast Click for mobile browsers
 	$(function() {
