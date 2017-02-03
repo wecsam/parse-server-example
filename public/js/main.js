@@ -394,12 +394,13 @@ $( document ).ready(function() {
 		);
 	});
 
-	$("#logout button").click(function(){
+	// If the page is reloaded while the user is logged in, then there is a current user.
+	if(Parse.User.current()){
+		// Save an event that the page was reloaded.
+		saveParseObjectExtension("UserReloadedWebpage", {});
+		// The user should be logged out if the page is reloaded the page.
 		Parse.User.logOut();
-	});
-
-	//Logout when the app is first loaded
-	Parse.User.logOut();
+	}
 
 	//Load Fast Click for mobile browsers
 	$(function() {
