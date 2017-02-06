@@ -9,7 +9,7 @@ var config = parseServerConfig(__dirname);
 // Modify config as necessary before initializing parse server & dashboard
 
 var app = express();
-app.use('/public', express.static(__dirname + '/public'));
+app.use('/', express.static(__dirname + '/public'));
 app.use('/parse', new ParseServer(config.server));
 app.use('/parse-dashboard', ParseDashboard(config.dashboard, true));
 
